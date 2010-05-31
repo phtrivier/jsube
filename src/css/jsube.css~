@@ -1,0 +1,5 @@
+.playground {
+    border-style : solid;
+    border-color : red;
+    border-size : 1px;
+}

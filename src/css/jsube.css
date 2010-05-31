@@ -1,0 +1,21 @@
+body {
+    background-color : black;
+    color : white;
+}
+
+#playground {
+    border-style : solid;
+    border-color : white;
+    border-size : 1px;
+    width : 704px;
+    height : 352px;
+    position : absolute;
+    top : 20;
+    bottom : 20;
+}
+
+.cell {
+    width : 32px;
+    height : 32px;
+    background-image : url("../../data/images/png/cell_1.png")
+}
