@@ -1,53 +1,45 @@
-// Create a stupid list of stuff
-cells = [];
-for (i = 0 ; i < 22 ; i++) {
-    cells[i] = [];
-}
-
-Ube = function() { };
-Ube.EMPTY = 0;
-Ube.IN = 1;
-Ube.WALKABLE = 2;
-Ube.OUT = 3;
-
-cells[0][0] = Ube.IN;
-cells[0][1] = Ube.EMPTY;
-cells[1][0] = Ube.WALKABLE;
-cells[1][1] = Ube.OUT;
-
 var g_cell_images = {}
+var g_images = {}
 var g_ctx;
 
-function load_image(dest, id, url, callback) {
+function load_image(dest, key, url, callback) {
     var img = new Image();
     img.onload = function() {
-	g_cell_images["1"] = img;
+	dest[key] = img;
 	callback();
     }
-    img.src = url;
+    img.src = "../../data/images/png/" + url;
     img.width = 32;
     img.height = 32;
-    
 }
 
 function load_images(callback) {
-    load_image(g_cell_images, "1", "../../data/images/png/cell_1.png", callback);
+    load_image(g_cell_images, "cell_1", "cell_1.png", function() {
+	load_image(g_cell_images, "cell_2", "cell_2.png", function() {
+	    load_image(g_images, "player", "player.png", callback);
+	});
+    });
 }
 
-function drawPuzzle() {
-    for (i = 0 ; i < 22 ; i++) {
-	for (j = 0 ; j < 11 ; j++) {
-	    // Add a div to the main div
-	    if (cells[i][j] != null) {
-		if (cells[i][j] == Ube.WALKABLE) {
-		    g_ctx.drawImage(g_cell_images["1"], j*32, i*32, 32, 32);
-		}
+function draw_puzzle(puzzle) {
+    puzzle.each_cells(function (i,j,cell) {
+	// Add a div to the main div
+	if (cell != null) {
+	    if (cell == Cell.WALKABLE || cell == Cell.IN) {
+		g_ctx.drawImage(g_cell_images["cell_1"], j*32, i*32, 32, 32);
+	    } else if (cell == Cell.OUT) {
+		g_ctx.drawImage(g_cell_images["cell_2"], j*32, i*32, 32, 32);
 	    }
 	}
-    }
+    });
+   
+    g_ctx.drawImage(g_images["player"], puzzle.player.i * 32, puzzle.player.j * 32, 32, 32);
 }
 
 $(document).ready(function(){
     g_ctx = document.getElementById('playground').getContext('2d');
-    load_images(drawPuzzle);
+    p = new Puzzle;
+    load_images(function () { 
+	draw_puzzle(p);
+    });
 });

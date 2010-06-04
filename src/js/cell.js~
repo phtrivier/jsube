@@ -1,0 +1,5 @@
+Ube = function() { };
+Ube.EMPTY = 0;
+Ube.IN = 1;
+Ube.WALKABLE = 2;
+Ube.OUT = 3;
