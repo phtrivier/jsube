@@ -33,12 +33,26 @@ function draw_puzzle(puzzle) {
 	}
     });
    
-    g_ctx.drawImage(g_images["player"], puzzle.player.i * 32, puzzle.player.j * 32, 32, 32);
+    g_ctx.drawImage(g_images["player"], puzzle.player.j * 32, puzzle.player.i * 32, 32, 32);
 }
 
 $(document).ready(function(){
-    g_ctx = document.getElementById('playground').getContext('2d');
+
     p = new Puzzle;
+    
+    g_ctx = document.getElementById('playground').getContext('2d');
+
+    $('#playground').bind('mousemove', function (e) {
+
+	_j = Math.floor((e.pageX - 20) / 32);
+	_i = Math.floor((e.pageY - 20)/ 32);
+
+	if (_i == 1 && _j == 1) {
+	    p.player = { i : _i, j : _j }
+	    draw_puzzle(p);
+	}
+    });
+
     load_images(function () { 
 	draw_puzzle(p);
     });
