@@ -14,7 +14,12 @@ function Puzzle() {
     this.cells[0][0] = new Cell(Cell.IN);
     this.cells[0][1] = new Cell(Cell.EMPTY);
     this.cells[1][0] = new Cell(Cell.WALKABLE);
-    this.cells[1][1] = new Cell(Cell.OUT);
+    this.cells[1][1] = new Cell(Cell.WALKABLE);
+    this.cells[1][2] = new Cell(Cell.WALKABLE);
+    this.cells[1][3] = new Cell(Cell.WALKABLE);
+    this.cells[1][4] = new Cell(Cell.WALKABLE);
+    this.cells[2][4] = new Cell(Cell.OUT);
+
     this.moves = [Move.SINGLE]
 
 };

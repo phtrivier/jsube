@@ -61,8 +61,15 @@ $(document).ready(function(){
 	j = Math.floor((e.pageX - 20) / 32);
 	i = Math.floor((e.pageY - 20) / 32);
 
+	/*
 	if (p.is_reachable({ i : i, j : j})) {
-	    g_path_finder.update_path(i,j,p)
+	} else {
+	    p.clear_path()
+	}
+	*/
+	new_goal = { i : i , j : j }
+	if (g_path_finder.goal_changed(new_goal)) {
+	    g_path_finder.update_path(p, new_goal)	    
 	    draw_puzzle(p);
 	}
 	

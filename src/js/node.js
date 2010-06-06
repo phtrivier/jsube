@@ -1,5 +1,5 @@
 function Node(i,j,parent) {
-    this.i  = i
+    this.i = i
     this.j = j
     this.parent = parent
 
@@ -16,10 +16,12 @@ Node.prototype.equals = function (other) {
 
 Node.prototype.successors = function (puzzle, move_type) {
     var res = []
+    var that = this
     // TODO(pht) : use filtering ? 
     $.each(this.successor_positions(move_type), function (index, position) {
 	if (puzzle.is_reachable(position)) {
-	    res.push(position);
+	    var s = new Node(position.i, position.j, that);
+	    res.push(s);
 	}
     });
     return res
