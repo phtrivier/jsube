@@ -1,0 +1,5 @@
+function PathFinder() {
+    this.goal = {}
+}
+
+PathFinder.

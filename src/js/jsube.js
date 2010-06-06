@@ -1,6 +1,8 @@
 var g_cell_images = {}
+var g_path_images = {}
 var g_images = {}
 var g_ctx;
+var g_path_finder = new PathFinder;
 
 function load_image(dest, key, url, callback) {
     var img = new Image();
@@ -16,24 +18,36 @@ function load_image(dest, key, url, callback) {
 function load_images(callback) {
     load_image(g_cell_images, "cell_1", "cell_1.png", function() {
 	load_image(g_cell_images, "cell_2", "cell_2.png", function() {
-	    load_image(g_images, "player", "player.png", callback);
+	    load_image(g_path_images, "path_0", "path_0.png", function () {
+		load_image(g_images, "player", "player.png", callback);
+	    });
 	});
     });
 }
 
+function draw_cell_image(image, i, j) {
+    g_ctx.drawImage(image, j*32, i*32, 32, 32);
+}
+
 function draw_puzzle(puzzle) {
     puzzle.each_cells(function (i,j,cell) {
+	var cell_type = cell.type
 	// Add a div to the main div
-	if (cell != null) {
-	    if (cell == Cell.WALKABLE || cell == Cell.IN) {
-		g_ctx.drawImage(g_cell_images["cell_1"], j*32, i*32, 32, 32);
-	    } else if (cell == Cell.OUT) {
-		g_ctx.drawImage(g_cell_images["cell_2"], j*32, i*32, 32, 32);
+	if (cell_type != null) {
+	    if (cell_type == Cell.WALKABLE || cell_type == Cell.IN) {
+		draw_cell_image(g_cell_images["cell_1"], i,j);
+	    } else if (cell_type == Cell.OUT) {
+		draw_cell_image(g_cell_images["cell_2"], i,j);
 	    }
+
+	    if (cell.in_path) {
+		draw_cell_image(g_path_images["path_0"],i,j);
+	    }
+
 	}
     });
-   
-    g_ctx.drawImage(g_images["player"], puzzle.player.j * 32, puzzle.player.i * 32, 32, 32);
+
+    draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
 }
 
 $(document).ready(function(){
@@ -43,14 +57,15 @@ $(document).ready(function(){
     g_ctx = document.getElementById('playground').getContext('2d');
 
     $('#playground').bind('mousemove', function (e) {
+	
+	j = Math.floor((e.pageX - 20) / 32);
+	i = Math.floor((e.pageY - 20) / 32);
 
-	_j = Math.floor((e.pageX - 20) / 32);
-	_i = Math.floor((e.pageY - 20)/ 32);
-
-	if (_i == 1 && _j == 1) {
-	    p.player = { i : _i, j : _j }
+	if (p.is_reachable({ i : i, j : j})) {
+	    g_path_finder.update_path(i,j,p)
 	    draw_puzzle(p);
 	}
+	
     });
 
     load_images(function () { 
