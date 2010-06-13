@@ -1,0 +1,2 @@
+* Show the list of available moves
+* Change the current move based on the click

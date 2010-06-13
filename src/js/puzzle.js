@@ -8,7 +8,7 @@ function Puzzle() {
     }
     this.player = { i : 0, j : 0}
     this.moves = []
-    this.current_move_index = 0;
+	this.current_move_index = 0;
 
     // Just hardcoded for the moment
     this.cells[0][0] = new Cell(Cell.IN);
@@ -20,7 +20,12 @@ function Puzzle() {
     this.cells[1][4] = new Cell(Cell.WALKABLE);
     this.cells[2][4] = new Cell(Cell.OUT);
 
-    this.moves = [Move.SINGLE]
+    var m1 = new Move;
+    m1.move_type = Move.SINGLE;
+    var m2 = new Move;
+    m2.move_type = Move.DOUBLE;
+	
+    this.moves = [ m1, m2];
 
 };
 
@@ -29,7 +34,7 @@ function Puzzle() {
  */
 Puzzle.prototype.current_move = function() {
     return this.moves[this.current_move_index];
-}
+};
 
 /**
  * Iterate over all the cells of the puzzle.
@@ -47,10 +52,14 @@ Puzzle.prototype.each_cells = function(callback) {
 Puzzle.prototype.is_reachable  = function (position) {
     return (this.cells[position.i] != null && this.cells[position.i][position.j] != null &&
 	    this.cells[position.i][position.j].type != Cell.EMPTY);
-}
+};
 
 Puzzle.prototype.clear_path = function () {
     this.each_cells(function (i,j,cell) {
-	cell.in_path = false;
-    });
-}
+	    cell.in_path = false;
+	});
+};
+	
+Puzzle.prototype.each_moves = function (f) {
+    $.each(this.moves, f);
+};

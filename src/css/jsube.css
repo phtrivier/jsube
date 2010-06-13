@@ -7,9 +7,6 @@ body {
     border-style : solid;
     border-color : white;
     border-size : 1px;
-    position : absolute;
-    top : 20;
-    bottom : 20;
 }
 
 .cell {
