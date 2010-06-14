@@ -50,16 +50,22 @@ function draw_puzzle(puzzle) {
     draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
 };
 
-function draw_ui(puzzle) {
+var g_move_buttons = [];
+
+function build_ui(puzzle) {
     puzzle.each_moves(function (i,move) {
-	    var img = document.createElement("img");
-	    img.src = "../../data/images/png/move_" + move.move_type + ".png";
-	    $('#moves').append(img);
-	    img.addEventListener("click", function (e) {
-		    alert("Clicked on move with index " + i + ", type :" + move.move_type);
-		}, false);
+	    var move_button = new MoveButton(puzzle, i, move, $('#moves'));
+	    g_move_buttons.push(move_button);
 	});
 };
+
+function draw_ui(puzzle) {
+    $.each(g_move_buttons, function (i, button) {
+	    // TODO : update the class / src of each
+	    // buttons depending on the state.
+	    button.set_selected((i==puzzle.current_move_index));
+	});
+}
 
 $(document).ready(function(){
 	
@@ -82,6 +88,7 @@ $(document).ready(function(){
 	
 	load_images(function () { 
 		draw_puzzle(p);
+		build_ui(p);
 		draw_ui(p);
 	    });
     });

@@ -1,2 +1,6 @@
 * Show the list of available moves
+** DONE Show images
+** highlight the current move
+
 * Change the current move based on the click
+

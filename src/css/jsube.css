@@ -20,3 +20,16 @@ body {
     height : 32px;
     background-image : url("../../data/images/png/player.png")
 }
+
+.move_unselected, .move_current {
+    border-style :solid;
+    border-size : 1px;
+}
+
+.move_unselected {
+    border-color : black;
+}
+
+.move_current {
+    border-color : blue;
+}

@@ -7,8 +7,8 @@ function Puzzle() {
 	this.cells[i] = [];
     }
     this.player = { i : 0, j : 0}
-    this.moves = []
-	this.current_move_index = 0;
+    this.moves = [];
+    this.current_move_index = 0;
 
     // Just hardcoded for the moment
     this.cells[0][0] = new Cell(Cell.IN);
@@ -63,3 +63,10 @@ Puzzle.prototype.clear_path = function () {
 Puzzle.prototype.each_moves = function (f) {
     $.each(this.moves, f);
 };
+
+// function Puzzle.try_set_current_move(index) {
+Puzzle.prototype.try_set_current_move = function (index) {
+    if (index >= 0 && index < this.moves.length && this.moves[index].available) {
+	this.current_move_index = index;
+    }
+}
