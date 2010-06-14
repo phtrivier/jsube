@@ -19,7 +19,9 @@ function load_images(callback) {
     load_image(g_cell_images, "cell_1", "cell_1.png", function() {
 	    load_image(g_cell_images, "cell_2", "cell_2.png", function() {
 		    load_image(g_path_images, "path_0", "path_0.png", function () {
-			    load_image(g_images, "player", "player.png", callback);
+			    load_image(g_path_images, "path_1", "path_1.png", function () {
+				    load_image(g_images, "player", "player.png", callback);
+				});
 			});
 		});
 	});
@@ -41,7 +43,7 @@ function draw_puzzle(puzzle) {
 		}
 		
 		if (cell.in_path) {
-		    draw_cell_image(g_path_images["path_0"],i,j);
+		    draw_cell_image(g_path_images["path_" + puzzle.current_move().move_type],i,j);
 		}
 		
 	    }

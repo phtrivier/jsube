@@ -10,7 +10,7 @@ PathFinder.prototype.update_path = function(puzzle, new_goal) {
     this.goal = new_goal;
     puzzle.clear_path();
     if (puzzle.is_reachable(new_goal)) {
-	this.find_path(puzzle, puzzle.player, this.goal, puzzle.current_move_type)
+	this.find_path(puzzle, puzzle.player, this.goal, puzzle.current_move().move_type)
     } 
 }
 
