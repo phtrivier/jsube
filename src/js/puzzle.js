@@ -69,4 +69,22 @@ Puzzle.prototype.try_set_current_move = function (index) {
     if (index >= 0 && index < this.moves.length && this.moves[index].available) {
 	this.current_move_index = index;
     }
-}
+};
+
+Puzzle.prototype.move_player = function (position) {
+    this.player = position;
+};
+
+Puzzle.prototype.is_valid_cell = function (position) {
+    return (this.cells[position.i] != null && this.cells[position.i][position.j] != null);
+};
+
+Puzzle.prototype.is_in_path = function (position) {
+    var res = false;
+    if (this.is_valid_cell(position)) {
+ 	res=this.cells[position.i][position.j].in_path;
+    }
+    return res;
+};
+
+

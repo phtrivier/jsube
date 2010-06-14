@@ -1,6 +1,10 @@
-* Show the list of available moves
+* DONE Show the list of available moves
 ** DONE Show images
-** highlight the current move
+** DONE highlight the current move
 
-* Change the current move based on the click
+* DONE Change the current move based on the click
+* DONE Use the current move when displaying the path
+* DONE Move the player from a position to another
+* TODO Use the current move when computing the moves
+* TODO Implement UNDO
 

@@ -67,7 +67,14 @@ function draw_ui(puzzle) {
 	    // buttons depending on the state.
 	    button.set_selected((i==puzzle.current_move_index));
 	});
-}
+};
+
+
+function get_mouse_position(e) {
+    j = Math.floor((e.pageX - 20) / 32);
+    i = Math.floor((e.pageY - 20) / 32);
+    return { i : i, j : j};
+};
 
 $(document).ready(function(){
 	
@@ -77,10 +84,8 @@ $(document).ready(function(){
 
 	$('#playground').bind('mousemove', function (e) {
 	
-		j = Math.floor((e.pageX - 20) / 32);
-		i = Math.floor((e.pageY - 20) / 32);
+		new_goal = get_mouse_position(e);
 		
-		new_goal = { i : i , j : j };
 		if (g_path_finder.goal_changed(new_goal)) {
 		    g_path_finder.update_path(p, new_goal);
 		    draw_puzzle(p);
@@ -88,6 +93,15 @@ $(document).ready(function(){
 		
 	    });
 	
+	$('#playground').bind('click', function (e) {
+		mouse_position = get_mouse_position(e);
+		if (p.is_in_path(mouse_position)) {
+		    p.move_player(mouse_position);
+		    g_path_finder.update_path(p, mouse_position);
+		    draw_puzzle(p);
+		}
+	    });
+
 	load_images(function () { 
 		draw_puzzle(p);
 		build_ui(p);
