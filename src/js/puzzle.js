@@ -87,4 +87,14 @@ Puzzle.prototype.is_in_path = function (position) {
     return res;
 };
 
-
+Puzzle.prototype.set_next_available_move_as_current = function () {
+    var size = this.moves.length;
+    var found = false;
+    var old_index = this.current_move_index;
+    do {
+	this.current_move_index = (this.current_move_index + 1) % size;
+	if (this.moves[this.current_move_index].available) {
+	    found = true;
+	}
+    } while (!found && this.current_move_index != old_index);
+}

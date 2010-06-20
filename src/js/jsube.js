@@ -3,6 +3,7 @@ var g_path_images = {};
 var g_images = {};
 var g_ctx;
 var g_path_finder = new PathFinder;
+var g_command_stack = new CommandStack;
 
 function load_image(dest, key, url, callback) {
     var img = new Image();
@@ -62,10 +63,12 @@ function build_ui(puzzle) {
 };
 
 function draw_ui(puzzle) {
+    toggle_enabled(g_command_stack.can_undo(), $("#undo"), "undo");
+    toggle_enabled(g_command_stack.can_redo(), $("#redo"), "redo");
+
     $.each(g_move_buttons, function (i, button) {
-	    // TODO : update the class / src of each
-	    // buttons depending on the state.
 	    button.set_selected((i==puzzle.current_move_index));
+	    button.set_available(puzzle.moves[i].available);
 	});
 };
 
@@ -74,6 +77,16 @@ function get_mouse_position(e) {
     j = Math.floor((e.pageX - 20) / 32);
     i = Math.floor((e.pageY - 20) / 32);
     return { i : i, j : j};
+};
+
+function toggle_enabled(enabled, elem, base) {
+    var enabled_class = base + "_enabled";
+    var disabled_class = base + "_disabled";
+    if (enabled) {
+	elem.removeClass(disabled_class).addClass(enabled_class);
+    } else {
+	elem.removeClass(enabled_class).addClass(disabled_class);
+    }
 };
 
 $(document).ready(function(){
@@ -96,8 +109,10 @@ $(document).ready(function(){
 	$('#playground').bind('click', function (e) {
 		mouse_position = get_mouse_position(e);
 		if (p.is_in_path(mouse_position)) {
-		    p.move_player(mouse_position);
+		    var command = new MoveCommand(p, mouse_position);
+		    g_command_stack.execute(command);
 		    g_path_finder.update_path(p, mouse_position);
+		    draw_ui(p);
 		    draw_puzzle(p);
 		}
 	    });
@@ -107,4 +122,22 @@ $(document).ready(function(){
 		build_ui(p);
 		draw_ui(p);
 	    });
+
+	$('#undo').click(function (e) {
+		if (g_command_stack.can_undo()) {
+		    g_command_stack.undo_last();
+		    draw_ui(p);
+		    draw_puzzle(p);
+		}
+	    });
+
+	$('#redo').click(function (e) {
+		if (g_command_stack.can_redo()) {
+		    g_command_stack.redo_last();
+		    draw_ui(p);
+		    draw_puzzle(p);
+		}
+	    });
+
+
     });

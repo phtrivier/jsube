@@ -33,3 +33,32 @@ body {
 .move_current {
     border-color : blue;
 }
+
+.undo_disabled, .undo_enabled, .redo_disabled, .redo_enabled {
+    width : 64px;
+    height : 64px;
+}
+
+.undo_disabled {
+    background-image : url('../../data/images/png/disabled_undo.png');
+}
+
+.redo_disabled {
+    background-image : url('../../data/images/png/disabled_redo.png');
+}
+
+.undo_enabled {
+    background-image : url('../../data/images/png/undo.png');
+}
+
+.redo_enabled {
+    background-image : url('../../data/images/png/redo.png');
+}
+
+#undo, #redo {
+    float : left;
+}
+
+#moves {
+    margin-left : 20px;
+}

@@ -24,4 +24,12 @@ Move.moves[Move.DOUBLE] = function (node) {
 
 Move.sp = function (move_type, node) {
     return Move.moves[move_type](node);
+};
+
+Move.prototype.use = function () {
+    this.available = false;
+}
+
+Move.prototype.revert = function () {
+    this.available = true;
 }

@@ -5,6 +5,12 @@
 * DONE Change the current move based on the click
 * DONE Use the current move when displaying the path
 * DONE Move the player from a position to another
-* TODO Use the current move when computing the moves
-* TODO Implement UNDO
+* DONE Use the current move when computing the moves
+* DONE Implement UNDO
+* DONE consume moves when moving
+* DONE Use a 'command' system to undo
+* TODO Implement proper loading of the puzzles
+* TODO Implement startup / end messages
+* TODO Implement finishing a puzzle
+* TODO Implement picking up moves along the way
 

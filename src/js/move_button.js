@@ -4,7 +4,10 @@
 function MoveButton(puzzle, index, move, target) {
     this.index = index;
     this.img = $("<img/>");
-    this.img.attr('src',"../../data/images/png/move_" + move.move_type + ".png");
+    this.move_type = move.move_type;
+
+    this.set_available(true);
+
     this.img.click(function (e) {
 	    puzzle.try_set_current_move(index);
 	    // FIXME(pht) : pass reference to view instead of 
@@ -29,3 +32,12 @@ MoveButton.prototype.set_selected = function (selected) {
 	this.img.removeClass('move_current').addClass('move_unselected');
     }
 };
+
+MoveButton.prototype.set_available = function (available) {
+    if (available) {
+	this.img.attr('src',"../../data/images/png/move_" + this.move_type + ".png");
+    } else {
+	this.img.attr('src',"../../data/images/png/move_" + this.move_type + "_grayed.png");
+    }
+};
+
