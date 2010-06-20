@@ -4,6 +4,8 @@ var g_images = {};
 var g_ctx;
 var g_path_finder = new PathFinder;
 var g_command_stack = new CommandStack;
+var g_move_buttons = [];
+var g_puzzle;
 
 function load_image(dest, key, url, callback) {
     var img = new Image();
@@ -53,8 +55,6 @@ function draw_puzzle(puzzle) {
     draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
 };
 
-var g_move_buttons = [];
-
 function build_ui(puzzle) {
     puzzle.each_moves(function (i,move) {
 	    var move_button = new MoveButton(puzzle, i, move, $('#moves'));
@@ -89,9 +89,22 @@ function toggle_enabled(enabled, elem, base) {
     }
 };
 
+function draw_all() {
+    draw_ui(g_puzzle);
+    draw_puzzle(g_puzzle);
+};
+
+function prevent_double_click(elem) {
+    elem.mousedown(function (e) {
+	    if (e.preventDefault) {
+		e.preventDefault();
+	    }
+	});
+}
+
 $(document).ready(function(){
-	
-	p = new Puzzle;
+
+	g_puzzle = new Puzzle;
 	
 	g_ctx = document.getElementById('playground').getContext('2d');
 
@@ -100,42 +113,40 @@ $(document).ready(function(){
 		new_goal = get_mouse_position(e);
 		
 		if (g_path_finder.goal_changed(new_goal)) {
-		    g_path_finder.update_path(p, new_goal);
-		    draw_puzzle(p);
+		    g_path_finder.update_path(g_puzzle, new_goal);
+		    draw_puzzle(g_puzzle);
 		}
 		
 	    });
 	
 	$('#playground').bind('click', function (e) {
 		mouse_position = get_mouse_position(e);
-		if (p.is_in_path(mouse_position)) {
-		    var command = new MoveCommand(p, mouse_position);
+		if (g_puzzle.is_in_path(mouse_position)) {
+		    var command = new MoveCommand(g_puzzle, mouse_position);
 		    g_command_stack.execute(command);
-		    g_path_finder.update_path(p, mouse_position);
-		    draw_ui(p);
-		    draw_puzzle(p);
+		    g_path_finder.update_path(g_puzzle, mouse_position);
+		    draw_all();
 		}
 	    });
 
 	load_images(function () { 
-		draw_puzzle(p);
-		build_ui(p);
-		draw_ui(p);
+		build_ui(g_puzzle);
+		draw_all();
 	    });
 
+	prevent_double_click($('#undo'));
 	$('#undo').click(function (e) {
 		if (g_command_stack.can_undo()) {
 		    g_command_stack.undo_last();
-		    draw_ui(p);
-		    draw_puzzle(p);
+		    draw_all();
 		}
 	    });
 
+	prevent_double_click($('#redo'));
 	$('#redo').click(function (e) {
 		if (g_command_stack.can_redo()) {
 		    g_command_stack.redo_last();
-		    draw_ui(p);
-		    draw_puzzle(p);
+		    draw_all();
 		}
 	    });
 

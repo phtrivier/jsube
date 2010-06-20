@@ -16,11 +16,7 @@ function MoveButton(puzzle, index, move, target) {
 	});
 
     // Disable drag and dropping of images (at least in FF)
-    this.img.mousedown(function (e) {
-	    if (e.preventDefault) {
-		e.preventDefault();
-	    }
-	});
+    prevent_double_click(this.img);
 
     target.append(this.img);
 };
