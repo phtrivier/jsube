@@ -104,7 +104,10 @@ function prevent_double_click(elem) {
 
 $(document).ready(function(){
 
-	g_puzzle = new Puzzle;
+	g_puzzle = new Puzzle({ rows : ["########",
+					"I#-----O",
+					"---#####"],
+				moves : [Move.SINGLE, Move.DOUBLE]});
 	
 	g_ctx = document.getElementById('playground').getContext('2d');
 

@@ -1,32 +1,63 @@
 /**
  * Representation of a puzzle
  */
-function Puzzle() {
+function Puzzle(structure) {
+    this.moves = [];
+    this.current_move_index = 0;
+
+
+    if (structure != null) {
+	this.load_puzzle_structure(structure);
+    }
+}
+ 
+Puzzle.prototype.load_puzzle_structure = function (structure) {
+
+    this.load_cells(structure.rows);
+    this.load_moves(structure.moves);
+  
+};
+
+Puzzle.prototype.load_moves = function (moves) {
+    this.moves = [];
+    var that = this;
+    $.each(moves, function (index, move_type) {
+	    var m = new Move;
+	    m.move_type = move_type;
+	    that.moves.push(m);
+	});
+}
+
+Puzzle.prototype.load_cells = function (rows) {
+
+    var that = this;
+
     this.cells = [];
     for (i = 0 ; i < 11 ; i++) {
 	this.cells[i] = [];
     }
-    // TODO : put player in entry
-    this.player = { i : 1, j : 0}
-    this.moves = [];
-    this.current_move_index = 0;
 
-    // Just hardcoded for the moment
-    this.cells[0][0] = new Cell(Cell.WALKABLE);
-    this.cells[1][0] = new Cell(Cell.IN);
-    this.cells[1][1] = new Cell(Cell.WALKABLE);
-    this.cells[1][2] = new Cell(Cell.WALKABLE);
-    this.cells[1][3] = new Cell(Cell.WALKABLE);
-    this.cells[1][4] = new Cell(Cell.WALKABLE);
-    this.cells[2][4] = new Cell(Cell.OUT);
-
-    var m1 = new Move;
-    m1.move_type = Move.SINGLE;
-    var m2 = new Move;
-    m2.move_type = Move.DOUBLE;
-	
-    this.moves = [ m1, m2];
-
+    $.each(rows, function (i, row) {
+	    $.each(row, function (j, letter) {
+		    var cell = null;
+		    switch(letter) {
+		    case '_' :
+			cell = new Cell(Cell.EMPTY);
+			break;
+		    case '-' :
+			cell = new Cell(Cell.WALKABLE);
+			break;
+		    case 'I' :
+			cell = new Cell(Cell.IN);
+			that.player = { i : i, j : j};
+			break;
+		    case 'O' :
+			cell = new Cell(Cell.OUT);
+			break;
+		    }
+		    that.cells[i][j] = cell;
+		});
+	});
 };
 
 /**
