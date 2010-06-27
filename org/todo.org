@@ -10,6 +10,7 @@
 * DONE consume moves when moving
 * DONE Use a 'command' system to undo
 * DONE Implement proper loading of the puzzles
+* DONE Fix bug after consumption of the last 
 * TODO Implement startup / end messages
 * TODO Implement finishing a puzzle
 * TODO Implement picking up moves along the way

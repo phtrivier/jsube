@@ -128,4 +128,13 @@ Puzzle.prototype.set_next_available_move_as_current = function () {
 	    found = true;
 	}
     } while (!found && this.current_move_index != old_index);
-}
+};
+
+Puzzle.prototype.current_move = function () {
+    return this.moves[this.current_move_index];
+};
+
+Puzzle.prototype.has_available_move = function () {
+    return (this.current_move_index != -1 && this.current_move() != null &&
+	    this.current_move().available);
+};
