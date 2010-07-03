@@ -14,4 +14,3 @@
 * DONE Implement picking up moves along the way
 * TODO Implement startup / end messages
 * TODO Implement finishing a puzzle
-
