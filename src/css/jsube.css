@@ -1,6 +1,15 @@
+html {
+    margin-left : 20%;
+    margin-right : 20%;
+}
+
 body {
     background-color : black;
     color : white;
+}
+
+#playground, #ui {
+    width : 704px;
 }
 
 #playground {
@@ -55,10 +64,26 @@ body {
     background-image : url('../../data/images/png/redo.png');
 }
 
+#ui {
+/*    border : 1px solid red; */
+    padding-top : 10px;
+}
+
+#undo-redo {
+/*     border : 1px solid blue; */
+    float : left;
+}
+
 #undo, #redo {
     float : left;
 }
 
 #moves {
+/*    border : 1px solid white; */
+    width : 550px;
+    float : left;
     margin-left : 20px;
+}
+
+#ube {
 }

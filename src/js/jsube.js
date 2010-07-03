@@ -6,7 +6,18 @@ var g_path_finder = new PathFinder;
 var g_command_stack = new CommandStack;
 var g_move_buttons = [];
 var g_puzzle;
+var g_overlays = {}
 
+// TODO : move more stuff in the drawer
+function Drawer() {
+};
+
+Drawer.prototype.draw_move_overlay = function (move_type, i , j) {
+    draw_cell_image(g_overlays[move_type], i, j);
+};
+
+var g_drawer = new Drawer;
+    
 function load_image(dest, key, url, callback) {
     var img = new Image();
     img.onload = function() {
@@ -18,13 +29,29 @@ function load_image(dest, key, url, callback) {
     img.height = 32;
 };
 
-function load_images(callback) {
+function load_cell_images(callback) {
     load_image(g_cell_images, "cell_1", "cell_1.png", function() {
-	    load_image(g_cell_images, "cell_2", "cell_2.png", function() {
-		    load_image(g_path_images, "path_0", "path_0.png", function () {
-			    load_image(g_path_images, "path_1", "path_1.png", function () {
-				    load_image(g_images, "player", "player.png", callback);
-				});
+	    load_image(g_cell_images, "cell_2", "cell_2.png", callback);
+       });
+};
+
+function load_path_images(callback) {
+    load_image(g_path_images, "path_0", "path_0.png", function () {
+	    load_image(g_path_images, "path_1", "path_1.png", callback);
+	});
+};
+
+function load_overlays(callback) {
+    load_image(g_overlays, Move.SINGLE, "overlay_move_0.png", function () {
+	    load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", callback);
+	});
+};
+
+function load_images(callback) {
+    load_cell_images(function () {
+	    load_path_images(function () {
+		    load_overlays(function() {
+			    load_image(g_images, "player", "player.png", callback);
 			});
 		});
 	});
@@ -49,6 +76,7 @@ function draw_puzzle(puzzle) {
 		    draw_cell_image(g_path_images["path_" + puzzle.current_move().move_type],i,j);
 		}
 		
+		cell.draw_overlay(g_drawer, i, j);
 	    }
 	});
     
@@ -56,6 +84,8 @@ function draw_puzzle(puzzle) {
 };
 
 function build_ui(puzzle) {
+    $('#moves').empty();
+    g_move_buttons = [];
     puzzle.each_moves(function (i,move) {
 	    var move_button = new MoveButton(puzzle, i, move, $('#moves'));
 	    g_move_buttons.push(move_button);
@@ -66,6 +96,8 @@ function draw_ui(puzzle) {
     toggle_enabled(g_command_stack.can_undo(), $("#undo"), "undo");
     toggle_enabled(g_command_stack.can_redo(), $("#redo"), "redo");
 
+    build_ui(puzzle);
+    
     $.each(g_move_buttons, function (i, button) {
 	    button.set_selected((i==puzzle.current_move_index));
 	    button.set_available(puzzle.moves[i].available);
@@ -74,8 +106,9 @@ function draw_ui(puzzle) {
 
 
 function get_mouse_position(e) {
-    j = Math.floor((e.pageX - 20) / 32);
-    i = Math.floor((e.pageY - 20) / 32);
+    offset = $("#playground").offset();
+    j = Math.floor((e.pageX - offset.left) / 32);
+    i = Math.floor((e.pageY - offset.top) / 32);
     return { i : i, j : j};
 };
 
@@ -105,9 +138,9 @@ function prevent_double_click(elem) {
 $(document).ready(function(){
 
 	g_puzzle = new Puzzle({ rows : ["########",
-					"I#-----O",
-					"---#####"],
-				moves : [Move.SINGLE, Move.DOUBLE]});
+					"I#DSSS-O",
+					"--D#####"],
+				moves : [Move.DOUBLE, Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.SINGLE, Move.SINGLE, Move.DOUBLE]});
 	
 	g_ctx = document.getElementById('playground').getContext('2d');
 

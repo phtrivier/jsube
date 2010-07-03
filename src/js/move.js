@@ -3,6 +3,11 @@ function Move() {
     this.available = true;
 }
 
+function Move(type) {
+    this.move_type = type;
+    this.available = true;
+}
+
 Move.SINGLE = 0;
 Move.DOUBLE = 1;
 

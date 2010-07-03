@@ -5,17 +5,15 @@ function Puzzle(structure) {
     this.moves = [];
     this.current_move_index = 0;
 
-
     if (structure != null) {
 	this.load_puzzle_structure(structure);
     }
 }
  
 Puzzle.prototype.load_puzzle_structure = function (structure) {
-
     this.load_cells(structure.rows);
     this.load_moves(structure.moves);
-  
+ 
 };
 
 Puzzle.prototype.load_moves = function (moves) {
@@ -29,14 +27,12 @@ Puzzle.prototype.load_moves = function (moves) {
 }
 
 Puzzle.prototype.load_cells = function (rows) {
-
     var that = this;
 
     this.cells = [];
     for (i = 0 ; i < 11 ; i++) {
 	this.cells[i] = [];
     }
-
     $.each(rows, function (i, row) {
 	    $.each(row, function (j, letter) {
 		    var cell = null;
@@ -53,6 +49,12 @@ Puzzle.prototype.load_cells = function (rows) {
 			break;
 		    case 'O' :
 			cell = new Cell(Cell.OUT);
+			break;
+		    case 'S' :
+			cell = new MoveCell(Move.SINGLE);
+			break;
+		    case 'D':
+			cell = new MoveCell(Move.DOUBLE);
 			break;
 		    }
 		    that.cells[i][j] = cell;
@@ -138,3 +140,13 @@ Puzzle.prototype.has_available_move = function () {
     return (this.current_move_index != -1 && this.current_move() != null &&
 	    this.current_move().available);
 };
+
+Puzzle.prototype.do_script_at = function (position) {
+    var c = this.cells[position.i][position.j];
+    c.do_script(this);
+}
+
+Puzzle.prototype.undo_script_at = function (position) {
+    var c = this.cells[position.i][position.j];
+    c.undo_script(this);
+}

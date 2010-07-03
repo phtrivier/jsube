@@ -67,10 +67,12 @@ MoveCommand.prototype.execute = function () {
     this.puzzle.move_player(this.target_position);
     this.puzzle.moves[this.move_index].use();
 
+    this.puzzle.do_script_at(this.target_position);
+
+
     this.puzzle.set_next_available_move_as_current();
 
-    // g_path_finder.update_path(puzzle, position);
-    // TODO(pht) add script handling
+
 };
 
 MoveCommand.prototype.undo = function () {
@@ -80,8 +82,14 @@ MoveCommand.prototype.undo = function () {
     this.old_position = this.puzzle.player;
     this.move_index = this.puzzle.current_move_index;
 
+    this.puzzle.undo_script_at(this.target_position);
+
+    
     this.puzzle.set_next_available_move_as_current();
 
+    
     // g_path_finder.update_path(puzzle, position);
     // TODO(pht) add script handling
+
+    
 };
