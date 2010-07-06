@@ -1,0 +1,47 @@
+<html>
+<head>
+  <title>UBE</title>
+  <link type="text/css" rel="stylesheet" href="../css/jsube.css"/>
+  <link rel="shortcut icon" type="image/x-icon" href="../../data/images/ico/player.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../data/images/png/player.png" />
+</head>
+<body>
+  <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.url.min.js"></script>
+  <!-- TODO : compress all files into a big one, zip it, and hope for the
+       best ... maybe using -->
+  <script type="text/javascript" src="../js/node.js"></script>
+  <script type="text/javascript" src="../js/agenda.js"></script>
+  <script type="text/javascript" src="../js/archive.js"></script>
+  <script type="text/javascript" src="../js/cell.js"></script>
+  <script type="text/javascript" src="../js/puzzle.js"></script>
+  <script type="text/javascript" src="../js/move.js"></script>
+  <script type="text/javascript" src="../js/path_finder.js"></script>
+  <script type="text/javascript" src="../js/move_button.js"></script>
+  <script type="text/javascript" src="../js/command_stack.js"></script>
+  <script type="text/javascript" src="../js/puzzles.js"></script>
+  <script type="text/javascript" src="../js/levels.js"></script>
+  <script type="text/javascript" src="../js/jsube.js"></script>
+
+  <div id="ube">
+
+    <div id="nagivation">
+      <div id="previous"><a class="link" id="link_previous">Puzzle pr&eacute;c&eacute;dent</a></div>
+      <div id="home"><a class="link"  href="jsube.html">Retour</a></div>
+      <div id="next"><a class="link"  id="link_next">Puzzle suivant</a></div>
+    </div>
+
+    <canvas id="playground" width="704px" height="352px"></canvas>
+    
+    <div id="ui">
+      <div id="undo-redo">
+	<div id="undo" class="undo_disabled"></div>
+	<div id="redo" class="redo_disabled"></div>
+      </div>
+      <div id="moves"/>
+    </div>
+    
+  </div>
+
+</body>
+</html>

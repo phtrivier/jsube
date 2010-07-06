@@ -135,13 +135,38 @@ function prevent_double_click(elem) {
 	});
 }
 
+function load_puzzle() {
+    var res = null;
+    var puzzle_id = parseInt($.url.param("puzzle_id"));
+    if (puzzle_id < PUZZLE_STRUCTS.length) {
+	var puzzle_struct = PUZZLE_STRUCTS[puzzle_id];
+	res = new Puzzle(puzzle_struct);
+	
+	// Load links
+	if (puzzle_id > 0) {
+	    $("#link_previous").attr("href", puzzle_href(puzzle_id - 1));
+	} else {
+	    $("#link_previous").remove();
+	}
+	if (puzzle_id < (PUZZLE_STRUCTS.length - 1)) {
+	    $("#link_next").attr("href", puzzle_href(puzzle_id + 1));
+	} else {
+	    $("#link_next").remove();
+	}
+
+    }
+    return res;
+}
+
 $(document).ready(function(){
 
-	g_puzzle = new Puzzle({ rows : ["########",
-					"I#DSSS-O",
-					"--D#####"],
-				moves : [Move.DOUBLE, Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.SINGLE, Move.SINGLE, Move.DOUBLE]});
-	
+	g_puzzle = load_puzzle();
+
+	if (g_puzzle == null) {
+	    alert("Erreur lors du chargement du puzzle !");
+	    return;
+	}
+
 	g_ctx = document.getElementById('playground').getContext('2d');
 
 	$('#playground').bind('mousemove', function (e) {

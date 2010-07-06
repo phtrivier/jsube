@@ -87,3 +87,21 @@ body {
 
 #ube {
 }
+
+a:link {text-decoration: none ; color : white}
+a:visited {text-decoration: none ; color : white}
+a:active {text-decoration: none ; color : white}
+a:hover {text-decoration: underline; color: white;}
+
+#navigation {
+    text-align : center;
+    width : 100%;
+    border : 1px solid green;
+}
+
+#previous, #home, #next {
+    float : left;
+    width : 30%;
+    padding-bottom : 20px;
+}
+
