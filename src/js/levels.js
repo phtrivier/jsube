@@ -15,7 +15,7 @@ function load_levels(start, count) {
 	    // TODO : escape to avoid injections
 	    title = s["title"]["fr"];
 
-	    var a = $(link_to_puzzle(start + i));
+	    var a = $(link_to_puzzle_href(start + i));
 	    a.append(title);
 
 	    var li = $("<li>");
