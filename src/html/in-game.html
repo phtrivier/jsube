@@ -1,51 +1,58 @@
 <html>
-<head>
-  <title>UBE</title>
-  <link type="text/css" rel="stylesheet" href="../css/jsube.css"/>
-  <link type="text/css" rel="stylesheet" href="../css/dark-hive/jquery-ui-1.8.2.custom.css"/>
-  <link rel="shortcut icon" type="image/x-icon" href="../../data/images/ico/player.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../../data/images/png/player.png" />
-</head>
-<body>
-  <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
-  <script type="text/javascript" src="../js/jquery.url.min.js"></script>
-  <script type="text/javascript" src="../js/jquery-ui-1.8.2.custom.min.js"></script>
-  <!-- TODO : compress all files into a big one, zip it, and hope for the
-       best ... maybe using -->
-  <script type="text/javascript" src="../js/node.js"></script>
-  <script type="text/javascript" src="../js/agenda.js"></script>
-  <script type="text/javascript" src="../js/archive.js"></script>
-  <script type="text/javascript" src="../js/cell.js"></script>
-  <script type="text/javascript" src="../js/puzzle.js"></script>
-  <script type="text/javascript" src="../js/move.js"></script>
-  <script type="text/javascript" src="../js/path_finder.js"></script>
-  <script type="text/javascript" src="../js/move_button.js"></script>
-  <script type="text/javascript" src="../js/command_stack.js"></script>
-  <script type="text/javascript" src="../js/puzzles.js"></script>
-  <script type="text/javascript" src="../js/levels.js"></script>
-  <script type="text/javascript" src="../js/jsube.js"></script>
+  <head>
+    <title>UBE</title>
+    <link type="text/css" rel="stylesheet" href="../css/jsube.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/dark-hive/jquery-ui-1.8.2.custom.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="../../data/images/ico/player.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../data/images/png/player.png" />
+  </head>
+  <body>
+    <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.url.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-1.8.2.custom.min.js"></script>
+    <!-- TODO : compress all files into a big one, zip it, and hope for the
+	 best ... maybe using -->
+    <script type="text/javascript" src="../js/node.js"></script>
+    <script type="text/javascript" src="../js/agenda.js"></script>
+    <script type="text/javascript" src="../js/archive.js"></script>
+    <script type="text/javascript" src="../js/cell.js"></script>
+    <script type="text/javascript" src="../js/puzzle.js"></script>
+    <script type="text/javascript" src="../js/move.js"></script>
+    <script type="text/javascript" src="../js/path_finder.js"></script>
+    <script type="text/javascript" src="../js/move_button.js"></script>
+    <script type="text/javascript" src="../js/command_stack.js"></script>
+    <script type="text/javascript" src="../js/puzzles.js"></script>
+    <script type="text/javascript" src="../js/levels.js"></script>
+    <script type="text/javascript" src="../js/jsube.js"></script>
 
-  <div id="ube">
+    <div id="wrapper">
 
-    <div id="nagivation">
-      <div id="previous"><a class="link transition" id="link_previous">Puzzle pr&eacute;c&eacute;dent</a></div>
-      <div id="home"><a class="link transition"  href="jsube.html">Retour</a></div>
-      <div id="next"><a class="link transition"  id="link_next">Puzzle suivant</a></div>
-    </div>
+      <div id="main">
 
-    <canvas id="playground" width="704px" height="352px"></canvas>
-    
-    <div id="ui">
-      <div id="undo-redo">
-	<div id="undo" class="undo_disabled"></div>
-	<div id="redo" class="redo_disabled"></div>
+	<div id="nagivation">
+	  <div id="previous"><a class="link transition" id="link_previous">Puzzle pr&eacute;c&eacute;dent</a></div>
+	  <div id="home"><a class="link transition"  href="jsube.html">Retour</a></div>
+	  <div id="next"><a class="link transition"  id="link_next">Puzzle suivant</a></div>
+	</div>
+
+	<canvas id="playground" width="704px" height="352px"></canvas>
+
+	<div id="ui">
+	  <div id="undo-redo">
+	    <div id="undo" class="undo_disabled"></div>
+	    <div id="redo" class="redo_disabled"></div>
+	  </div>
+	  <div id="moves"></div>
+	</div>
+
       </div>
-      <div id="moves"/>
+
     </div>
+
+    <div id="footer">Copyright (C) 2010 - Pierre-Henri Trivier</div>
 
     <div id="dialog-message"/>
-          
-  </div>
 
-</body>
+
+  </body>
 </html>
