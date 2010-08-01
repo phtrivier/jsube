@@ -12,8 +12,12 @@ function load_levels(start, count) {
 	var s = PUZZLE_STRUCTS[(start+i)];
 
 	if (s != null) {
-	    // TODO : escape to avoid injections
-	    title = s["title"]["fr"];
+	    var lg = "en";
+	    if (navigator.language == "fr") {
+		lg = "fr";
+	    }
+	    
+	    title = s["title"][lg];
 
 	    var a = $(link_to_puzzle_href(start + i));
 	    a.append(title);

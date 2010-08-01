@@ -7,6 +7,14 @@ var g_command_stack = new CommandStack;
 var g_move_buttons = [];
 var g_puzzle;
 var g_overlays = {}
+var g_lang = "en";
+
+var i18n = { en : { "puzzle.previous" : "Previous puzzle",
+		    "puzzle.next" : "Next puzzle",
+		    "puzzle.home" : "Back" },
+	     fr : { "puzzle.previous" : "Puzzle pr&eacute;c&eacute;dent",
+		    "puzzle.next" : "Puzzle suivant",
+		    "puzzle.home" : "Retour" } }
 
 // TODO : move more stuff in the drawer
 function Drawer() {
@@ -141,6 +149,11 @@ function load_puzzle() {
     if (puzzle_id < PUZZLE_STRUCTS.length) {
 	var puzzle_struct = PUZZLE_STRUCTS[puzzle_id];
 	res = new Puzzle(puzzle_struct);
+
+	// Put text in links
+	$("#link_previous").append(i18n[g_lang]["puzzle.previous"]);
+	$("#link_next").append(i18n[g_lang]["puzzle.next"]);
+	$("#link_home").append(i18n[g_lang]["puzzle.home"]);
 	
 	// Load links
 	if (puzzle_id > 0) {
@@ -160,10 +173,11 @@ function load_puzzle() {
 
 function show_message(messages, callback) {
 
+
     $("#dialog-message").empty();
 
     var p = $("<p>");
-    p.append(messages['fr']);
+    p.append(messages[g_lang]);
     p.append("</p>");
     
     $("#dialog-message").append(p);
@@ -194,6 +208,10 @@ function next_puzzle() {
 }
 
 $(document).ready(function(){
+
+    if (navigator.language == "fr") {
+	g_lang = "fr";
+    }
 
     $("body").css("display", "none");
     $("body").fadeIn(1000);

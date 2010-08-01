@@ -4,7 +4,9 @@ function p(struct) {
     PUZZLE_STRUCTS.push(struct);
 };
 
-p({title : { fr : 'Pour commencer, trouvez la sortie...' },
+p({title : { fr : 'Pour commencer, trouvez la sortie...',
+	     en : "Let's find the exit, for a start..."
+	   },
    rows : ["######################",
 	   "######################",
 	   "######################",
@@ -21,7 +23,9 @@ p({title : { fr : 'Pour commencer, trouvez la sortie...' },
 	      fr : "Bien jou&eacute; ! Vous avez remarqu&eacute; que votre chemin &eacute;tait trac&eacute; au fur et &agrave; mesure ? Maintenant essayez un autre niveau..."},
    moves : [Move.SINGLE]});
 
-p({title : { fr : 'Parfois, il faut savoir sauter' },
+p({title : { fr : 'Parfois, il faut savoir sauter',
+	     en : "Sometimes, you have to jump"
+	   },
    rows : ["I----------___________",
 	   "__________-___________",
 	   "_________---__________",
@@ -40,7 +44,9 @@ p({title : { fr : 'Parfois, il faut savoir sauter' },
 
 
 
-p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.' },
+p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.',
+	     en : "A wall. You can cross it, believe me..."
+	   },
    rows : ["----------____________",
 	   "-I---------___________",
 	   "--------------------__",
@@ -58,7 +64,9 @@ p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.' },
    moves : [Move.SINGLE, Move.SINGLE, Move.DOUBLE]});
 
 
-p({title : { fr : 'Compliquons un peu. Juste un peu.' },
+p({title : { fr : 'Compliquons un peu. Juste un peu.',
+	     en : "Let's get harder. Just a bit."
+	   },
    rows : ["I-___________----_____",
 	   "----------___-------__",
 	   "__--_________----__-__",
@@ -77,7 +85,9 @@ p({title : { fr : 'Compliquons un peu. Juste un peu.' },
 
    moves : [Move.DOUBLE, Move.SINGLE, Move.SINGLE ]});
 
-p({title : { fr : "Vous trouverez une solution en chemin..."},
+p({title : { fr : "Vous trouverez une solution en chemin...",
+	     en : "You'll find a solution along the way..."
+	   },
    rows : ["___________-__________",
 	   "________-__-__-_______",
 	   "_________-_-_-________",
@@ -92,7 +102,9 @@ p({title : { fr : "Vous trouverez une solution en chemin..."},
 
    moves : [Move.SINGLE, Move.SINGLE ]});
 
-p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.' },
+p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.',
+	     en : "Be wise. Clock-wise..."
+	   },
    rows : ["______________________",
 	   "__---____________---__",
 	   "_--D----------_--S---_",
@@ -109,7 +121,9 @@ p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.' },
 	      fr : "Parfois, il y a plusieurs solutions..."},
    moves : [Move.SINGLE, Move.SINGLE]});
 
-p({title : { fr : "Ca a l'air facile ? Regardez bien..." },
+p({title : { fr : "Ca a l'air facile ? Regardez bien..." ,
+	     en : "Looking simple ? Look again..."
+	   },
    rows : ["______________________",
 	   "_______-______________",
 	   "___-----_--S-_________",
@@ -125,7 +139,9 @@ p({title : { fr : "Ca a l'air facile ? Regardez bien..." },
    moves : [Move.DOUBLE, Move.DOUBLE]});
 
 
-p({title : { fr : 'Encore trop simple ? Voyons voir...' },
+p({title : { fr : 'Encore trop simple ? Voyons voir...',
+	     en : "Still too easy ? Let's see..."
+	   },
    rows : ["______________________",
 	   "_____-------_-----____",
 	   "_____-___________-____",
