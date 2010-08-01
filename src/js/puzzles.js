@@ -16,9 +16,9 @@ p({title : { fr : 'Pour commencer, trouvez la sortie...' },
 	   "######################",
 	   "######################",
 	   "######################"],
-   on_start : {en : "Welcome to UBE ! You are the little blue ball. The exit is on the other side. Simply point and click to reach the exit. Easy enough, right_?", 		fr : "Bienvenue dans UBE ! Vous êtes la petite bille bleue. La sortie est de l'autre côté. Cliquez sur la sortie pour l'atteindre. Pas trop dur ?"},
+   on_start : {en : "Welcome to UBE ! You are the little blue ball. The exit is on the other side. Simply point and click to reach the exit. Easy enough, right ?", 		fr : "Bienvenue dans UBE ! Vous &ecirc;tes la petite bille bleue. La sortie est de l'autre c&ocirc;t&eacute;. Cliquez sur la sortie pour l'atteindre. Pas trop dur ?"},
    on_end : { en : "Well done ! Have you noticed how your path has been highlighted ? Now, go on and try another puzzle...",
-	      fr : "Bien joué ! Vous avez remarqué que votre chemin était tracé au fur et à mesure ? Maintenant essayez un autre niveau..."},
+	      fr : "Bien jou&eacute; ! Vous avez remarqu&eacute; que votre chemin &eacute;tait trac&eacute; au fur et &agrave; mesure ? Maintenant essayez un autre niveau..."},
    moves : [Move.SINGLE]});
 
 p({title : { fr : 'Parfois, il faut savoir sauter' },
@@ -34,13 +34,12 @@ p({title : { fr : 'Parfois, il faut savoir sauter' },
 	   "______________________",
 	   "__________-_-_-_-_-___"],
 
+   on_start : {en : "The buttons at the bottom are your possible moves. The yellow moves lets you move two cells at a time. You'll need it",
+	       fr : "Les bouttons en bas de l'&eacute;cran sont vos diff&eacute;rents mouvements possibles. Avec le jaune, vous pouvez avancer de deux cases &agrave; la fois. Vous en aurez besoin..."},
    moves : [Move.SINGLE, Move.DOUBLE]});
 
-/*
-  after_start_message({en = "The buttons at the bottom are your possible moves. The yellow moves lets you move two cells at a time. You'll need it",
-  fr = "Les bouttons en bas de l'écran sont vos différents mouvements possibles. Avec le jaune, vous pouvez avancer de deux cases à la fois. Vous en aurez besoin..."],
 
-*/
+
 p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.' },
    rows : ["----------____________",
 	   "-I---------___________",
@@ -54,12 +53,10 @@ p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.' },
 	   "________--_---------O-",
 	   "_________-_-----------"],
 
+   on_start : {en : "If you ever make a mistake, you can use the arrows at the bottom to undo or redo, as many times as you want !",
+	       fr : "Si vous pensez vous &ecirc;tre tromp&eacute;, pas de panique ! Les deux fl&egrave;ches en bas &agrave; gauche vous permettent de revenir en arri&egrave;re autant de fois que vous voulez !"},
    moves : [Move.SINGLE, Move.SINGLE, Move.DOUBLE]});
 
-/*
-  after_start_message({en = "If you ever make a mistake, you can use the arrows at the bottom to undo or redo, as many times as you want_!",
-  fr = "Si vous pensez vous être trompé, pas de panique_! Les deux flèches en bas à gauche vous permettent de revenir en arrière autant de fois que vous voulez_!"],
-*/
 
 p({title : { fr : 'Compliquons un peu. Juste un peu.' },
    rows : ["I-___________----_____",
@@ -74,11 +71,11 @@ p({title : { fr : 'Compliquons un peu. Juste un peu.' },
 	   "___-___-___________-__",
 	   "___-----___________--O"],
 
+   on_end : {en : "You're starting to get it ! Let's continue...",
+	     fr : "Vous avez compris le truc ! Continuons..."},
+
+
    moves : [Move.DOUBLE, Move.SINGLE, Move.SINGLE ]});
-/*
-  before_end_message({en="You're starting to get it_! Let's continue...",
-  fr="Vous avez compris le truc_! Continuons..."],
-*/
 
 p({title : { fr : "Vous trouverez une solution en chemin..."},
    rows : ["___________-__________",
@@ -86,7 +83,7 @@ p({title : { fr : "Vous trouverez une solution en chemin..."},
 	   "_________-_-_-________",
 	   "__________---_________",
 	   "______________-----___",
-	   "I-----------_---O---__",
+	   "I----------D_---O---__",
 	   "______________-----___",
 	   "__________---_________",
 	   "_________-_-_-________",
@@ -94,12 +91,6 @@ p({title : { fr : "Vous trouverez une solution en chemin..."},
 	   "___________-__________"],
 
    moves : [Move.SINGLE, Move.SINGLE ]});
-
-/*
-  add_move(5,11,Move.DOUBLE, { en = "You picked another move. You can use it to reach the exit_!", 
-  fr = "Vous avez gagné un déplacement. Utilisez le pour atteindre la sortie_!"
-  ],
-*/
 
 p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.' },
    rows : ["______________________",
@@ -114,12 +105,9 @@ p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.' },
 	   "__---____________--___",
 	   "______________________"],
 
+   on_start :{en : "Sometimes, there is more than one solution...",
+	      fr : "Parfois, il y a plusieurs solutions..."},
    moves : [Move.SINGLE, Move.SINGLE]});
-
-/*
-  after_start_message({en = "Sometimes, there is more than one solution...",
-  fr = "Parfois, il y a plusieurs solutions..."],
-*/
 
 p({title : { fr : "Ca a l'air facile ? Regardez bien..." },
    rows : ["______________________",
@@ -150,13 +138,9 @@ p({title : { fr : 'Encore trop simple ? Voyons voir...' },
 	   "_____----S____----____",
 	   "______________________"],
 
+   on_start : { en : "It's time for the last puzzle...",
+		fr : "On en arrive au dernier niveau..."},
+   on_end : { en : "This tutorial is now over. Thanks for playing !",
+	      fr : "Ce tutoriel est maintenant fini. Merci d'avoir jou&eacute; !"},
    moves : [Move.SINGLE, Move.DOUBLE ]});
 
-/*
-  after_start_message({en = "It's time for the last puzzle...",
-  fr = "On en arrive au dernier niveau..."],
-
-  before_end_message({ en = "This tutorial is now over. Thanks for playing !",
-  fr = "Ce tutoriel est maintenant fini. Merci d'avoir joué !"],
-
-*/
