@@ -21,9 +21,6 @@ p({title : { fr : 'Pour commencer, trouvez la sortie...' },
 	      fr : "Bien joué ! Vous avez remarqué que votre chemin était tracé au fur et à mesure ? Maintenant essayez un autre niveau..."},
    moves : [Move.SINGLE]});
 
-/*
- */
-
 p({title : { fr : 'Parfois, il faut savoir sauter' },
    rows : ["I----------___________",
 	   "__________-___________",
