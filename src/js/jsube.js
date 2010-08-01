@@ -185,13 +185,28 @@ function show_message(messages, callback) {
 }
 
 function next_puzzle() {
-    // TODO(pht) nice effect
-    alert("Would move to next puzzle with a nice effect");
+    var puzzle_id = parseInt($.url.param("puzzle_id"));
+    if (puzzle_id < PUZZLE_STRUCTS.length - 1) {
+	$("body").fadeOut(1000, function() {	
+	    window.location = puzzle_href(puzzle_id + 1);
+	});
+    }
 }
 
 $(document).ready(function(){
 
+    $("body").css("display", "none");
+    $("body").fadeIn(1000);
+
     g_puzzle = load_puzzle();
+
+    $("a.transition").click(function (event) {
+	event.preventDefault();
+	linkLocation = this.href;
+	$("body").fadeOut(1000, function () {
+	    window.location = linkLocation;
+	});
+    });
 
     if (g_puzzle.on_start_messages != null) {
 	show_message(g_puzzle.on_start_messages);
