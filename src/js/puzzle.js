@@ -5,25 +5,33 @@ function Puzzle(structure) {
     this.moves = [];
     this.current_move_index = 0;
 
+    this.on_start_messages = null;
+    this.on_end_messages = null;
+
     if (structure != null) {
 	this.load_puzzle_structure(structure);
     }
 }
- 
+
 Puzzle.prototype.load_puzzle_structure = function (structure) {
     this.load_cells(structure.rows);
     this.load_moves(structure.moves);
- 
+    this.load_messages(structure);
+};
+
+Puzzle.prototype.load_messages = function (structure) {
+    this.on_start_messages = structure.on_start;
+    this.on_end_messages = structure.on_end;
 };
 
 Puzzle.prototype.load_moves = function (moves) {
     this.moves = [];
     var that = this;
     $.each(moves, function (index, move_type) {
-	    var m = new Move;
-	    m.move_type = move_type;
-	    that.moves.push(m);
-	});
+	var m = new Move;
+	m.move_type = move_type;
+	that.moves.push(m);
+    });
 }
 
 Puzzle.prototype.load_cells = function (rows) {
@@ -34,32 +42,32 @@ Puzzle.prototype.load_cells = function (rows) {
 	this.cells[i] = [];
     }
     $.each(rows, function (i, row) {
-	    $.each(row, function (j, letter) {
-		    var cell = null;
-		    switch(letter) {
-		    case '_' :
-			cell = new Cell(Cell.EMPTY);
-			break;
-		    case '-' :
-			cell = new Cell(Cell.WALKABLE);
-			break;
-		    case 'I' :
-			cell = new Cell(Cell.IN);
-			that.player = { i : i, j : j};
-			break;
-		    case 'O' :
-			cell = new Cell(Cell.OUT);
-			break;
-		    case 'S' :
-			cell = new MoveCell(Move.SINGLE);
-			break;
-		    case 'D':
-			cell = new MoveCell(Move.DOUBLE);
-			break;
-		    }
-		    that.cells[i][j] = cell;
-		});
+	$.each(row, function (j, letter) {
+	    var cell = null;
+	    switch(letter) {
+	    case '_' :
+		cell = new Cell(Cell.EMPTY);
+		break;
+	    case '-' :
+		cell = new Cell(Cell.WALKABLE);
+		break;
+	    case 'I' :
+		cell = new Cell(Cell.IN);
+		that.player = { i : i, j : j};
+		break;
+	    case 'O' :
+		cell = new Cell(Cell.OUT);
+		break;
+	    case 'S' :
+		cell = new MoveCell(Move.SINGLE);
+		break;
+	    case 'D':
+		cell = new MoveCell(Move.DOUBLE);
+		break;
+	    }
+	    that.cells[i][j] = cell;
 	});
+    });
 };
 
 /**
@@ -89,10 +97,10 @@ Puzzle.prototype.is_reachable  = function (position) {
 
 Puzzle.prototype.clear_path = function () {
     this.each_cells(function (i,j,cell) {
-	    cell.in_path = false;
-	});
+	cell.in_path = false;
+    });
 };
-	
+
 Puzzle.prototype.each_moves = function (f) {
     $.each(this.moves, f);
 };
@@ -149,4 +157,10 @@ Puzzle.prototype.do_script_at = function (position) {
 Puzzle.prototype.undo_script_at = function (position) {
     var c = this.cells[position.i][position.j];
     c.undo_script(this);
+}
+
+Puzzle.prototype.is_finished = function () {
+    var p = this.player;
+    var c = this.cells[p.i][p.j];
+    return (c.type == Cell.OUT)
 }

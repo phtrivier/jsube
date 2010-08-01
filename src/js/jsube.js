@@ -17,7 +17,7 @@ Drawer.prototype.draw_move_overlay = function (move_type, i , j) {
 };
 
 var g_drawer = new Drawer;
-    
+
 function load_image(dest, key, url, callback) {
     var img = new Image();
     img.onload = function() {
@@ -31,30 +31,30 @@ function load_image(dest, key, url, callback) {
 
 function load_cell_images(callback) {
     load_image(g_cell_images, "cell_1", "cell_1.png", function() {
-	    load_image(g_cell_images, "cell_2", "cell_2.png", callback);
-       });
+	load_image(g_cell_images, "cell_2", "cell_2.png", callback);
+    });
 };
 
 function load_path_images(callback) {
     load_image(g_path_images, "path_0", "path_0.png", function () {
-	    load_image(g_path_images, "path_1", "path_1.png", callback);
-	});
+	load_image(g_path_images, "path_1", "path_1.png", callback);
+    });
 };
 
 function load_overlays(callback) {
     load_image(g_overlays, Move.SINGLE, "overlay_move_0.png", function () {
-	    load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", callback);
-	});
+	load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", callback);
+    });
 };
 
 function load_images(callback) {
     load_cell_images(function () {
-	    load_path_images(function () {
-		    load_overlays(function() {
-			    load_image(g_images, "player", "player.png", callback);
-			});
-		});
+	load_path_images(function () {
+	    load_overlays(function() {
+		load_image(g_images, "player", "player.png", callback);
+	    });
 	});
+    });
 };
 
 function draw_cell_image(image, i, j) {
@@ -63,22 +63,22 @@ function draw_cell_image(image, i, j) {
 
 function draw_puzzle(puzzle) {
     puzzle.each_cells(function (i,j,cell) {
-	    var cell_type = cell.type;
-	    // Add a div to the main div
-	    if (cell_type != null) {
-		if (cell_type == Cell.WALKABLE || cell_type == Cell.IN) {
-		    draw_cell_image(g_cell_images["cell_1"], i,j);
-		} else if (cell_type == Cell.OUT) {
-		    draw_cell_image(g_cell_images["cell_2"], i,j);
-		}
-		
-		if (cell.in_path) {
-		    draw_cell_image(g_path_images["path_" + puzzle.current_move().move_type],i,j);
-		}
-		
-		cell.draw_overlay(g_drawer, i, j);
+	var cell_type = cell.type;
+	// Add a div to the main div
+	if (cell_type != null) {
+	    if (cell_type == Cell.WALKABLE || cell_type == Cell.IN) {
+		draw_cell_image(g_cell_images["cell_1"], i,j);
+	    } else if (cell_type == Cell.OUT) {
+		draw_cell_image(g_cell_images["cell_2"], i,j);
 	    }
-	});
+	    
+	    if (cell.in_path) {
+		draw_cell_image(g_path_images["path_" + puzzle.current_move().move_type],i,j);
+	    }
+	    
+	    cell.draw_overlay(g_drawer, i, j);
+	}
+    });
     
     draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
 };
@@ -87,9 +87,9 @@ function build_ui(puzzle) {
     $('#moves').empty();
     g_move_buttons = [];
     puzzle.each_moves(function (i,move) {
-	    var move_button = new MoveButton(puzzle, i, move, $('#moves'));
-	    g_move_buttons.push(move_button);
-	});
+	var move_button = new MoveButton(puzzle, i, move, $('#moves'));
+	g_move_buttons.push(move_button);
+    });
 };
 
 function draw_ui(puzzle) {
@@ -99,9 +99,9 @@ function draw_ui(puzzle) {
     build_ui(puzzle);
     
     $.each(g_move_buttons, function (i, button) {
-	    button.set_selected((i==puzzle.current_move_index));
-	    button.set_available(puzzle.moves[i].available);
-	});
+	button.set_selected((i==puzzle.current_move_index));
+	button.set_available(puzzle.moves[i].available);
+    });
 };
 
 
@@ -129,10 +129,10 @@ function draw_all() {
 
 function prevent_double_click(elem) {
     elem.mousedown(function (e) {
-	    if (e.preventDefault) {
-		e.preventDefault();
-	    }
-	});
+	if (e.preventDefault) {
+	    e.preventDefault();
+	}
+    });
 }
 
 function load_puzzle() {
@@ -158,58 +158,103 @@ function load_puzzle() {
     return res;
 }
 
+function show_message(messages, callback) {
+
+    $("#dialog-message").empty();
+
+    var p = $("<p>");
+    p.append(messages['fr']);
+    p.append("</p>");
+    
+    $("#dialog-message").append(p);
+
+    // TODO(pht) : switch language
+    $("#dialog-message").dialog({
+	modal: true,
+	width : 400,
+	title : "Ube",
+	buttons: {
+	    Ok: function() {
+		$(this).dialog('close');
+		if (callback != null) {
+		    callback();
+		}
+	    }
+	}
+    });
+}
+
+function next_puzzle() {
+    // TODO(pht) nice effect
+    alert("Would move to next puzzle with a nice effect");
+}
+
 $(document).ready(function(){
 
-	g_puzzle = load_puzzle();
+    g_puzzle = load_puzzle();
 
-	if (g_puzzle == null) {
-	    alert("Erreur lors du chargement du puzzle !");
-	    return;
+    if (g_puzzle.on_start_messages != null) {
+	show_message(g_puzzle.on_start_messages);
+    }
+
+    if (g_puzzle == null) {
+	alert("Erreur lors du chargement du puzzle !");
+	return;
+    }
+
+    g_ctx = document.getElementById('playground').getContext('2d');
+
+    $('#playground').bind('mousemove', function (e) {
+	
+	new_goal = get_mouse_position(e);
+	
+	if (g_path_finder.goal_changed(new_goal)) {
+	    g_path_finder.update_path(g_puzzle, new_goal);
+	    draw_puzzle(g_puzzle);
 	}
-
-	g_ctx = document.getElementById('playground').getContext('2d');
-
-	$('#playground').bind('mousemove', function (e) {
 	
-		new_goal = get_mouse_position(e);
-		
-		if (g_path_finder.goal_changed(new_goal)) {
-		    g_path_finder.update_path(g_puzzle, new_goal);
-		    draw_puzzle(g_puzzle);
-		}
-		
-	    });
-	
-	$('#playground').bind('click', function (e) {
-		mouse_position = get_mouse_position(e);
-		if (g_puzzle.is_in_path(mouse_position)) {
-		    var command = new MoveCommand(g_puzzle, mouse_position);
-		    g_command_stack.execute(command);
-		    g_path_finder.update_path(g_puzzle, mouse_position);
-		    draw_all();
-		}
-	    });
-
-	load_images(function () { 
-		build_ui(g_puzzle);
-		draw_all();
-	    });
-
-	prevent_double_click($('#undo'));
-	$('#undo').click(function (e) {
-		if (g_command_stack.can_undo()) {
-		    g_command_stack.undo_last();
-		    draw_all();
-		}
-	    });
-
-	prevent_double_click($('#redo'));
-	$('#redo').click(function (e) {
-		if (g_command_stack.can_redo()) {
-		    g_command_stack.redo_last();
-		    draw_all();
-		}
-	    });
-
-
     });
+    
+    $('#playground').bind('click', function (e) {
+	mouse_position = get_mouse_position(e);
+	if (g_puzzle.is_in_path(mouse_position)) {
+	    var command = new MoveCommand(g_puzzle, mouse_position);
+	    g_command_stack.execute(command);
+	    g_path_finder.update_path(g_puzzle, mouse_position);
+	    draw_all();
+
+	    if (g_puzzle.is_finished()) {
+		if (g_puzzle.on_end_messages != null) {
+		    show_message(g_puzzle.on_end_messages, function () {
+			next_puzzle();
+		    });
+		} else {
+		    next_puzzle();
+		}
+	    }
+	    
+	}
+    });
+
+    load_images(function () { 
+	build_ui(g_puzzle);
+	draw_all();
+    });
+
+    prevent_double_click($('#undo'));
+    $('#undo').click(function (e) {
+	if (g_command_stack.can_undo()) {
+	    g_command_stack.undo_last();
+	    draw_all();
+	}
+    });
+
+    prevent_double_click($('#redo'));
+    $('#redo').click(function (e) {
+	if (g_command_stack.can_redo()) {
+	    g_command_stack.redo_last();
+	    draw_all();
+	}
+    });
+
+});
