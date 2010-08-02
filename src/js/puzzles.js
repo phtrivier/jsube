@@ -160,3 +160,18 @@ p({title : { fr : 'Encore trop simple ? Voyons voir...',
 	      fr : "Ce tutoriel est maintenant fini. Merci d'avoir jou&eacute; !"},
    moves : [Move.SINGLE, Move.DOUBLE ]});
 
+p({title : { fr : 'Pour commencer, trouvez la sortie...',
+	     en : "Let's find the exit, for a start..."
+	   },
+   rows : ["######################",
+	   "######################",
+	   "######################",
+	   "##-----########-----##",
+	   "#-------######-------#",
+	   "#---I------K-----O---#",
+	   "#-------######-------#",
+	   "##-----########-----##",
+	   "######################",
+	   "######################",
+	   "######################"],
+   moves : [Move.SINGLE, Move.KNIGHT]});
