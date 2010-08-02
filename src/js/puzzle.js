@@ -64,6 +64,9 @@ Puzzle.prototype.load_cells = function (rows) {
 	    case 'D':
 		cell = new MoveCell(Move.DOUBLE);
 		break;
+	    case 'K':
+		cell = new MoveCell(Move.KNIGHT);
+		break;
 	    }
 	    that.cells[i][j] = cell;
 	});
@@ -163,4 +166,17 @@ Puzzle.prototype.is_finished = function () {
     var p = this.player;
     var c = this.cells[p.i][p.j];
     return (c.type == Cell.OUT)
+}
+
+Puzzle.prototype.cell_at = function (position) {
+    var res = null;
+    if (this.cells[position.i] != null) {
+	res = this.cells[position.i][position.j];
+    }
+    return res;
+}
+
+Puzzle.prototype.is_forbiden = function (position) {
+    var c = this.cell_at(position);
+    return (c!= null && c.type != Cell.EMPTY && !c.in_path);
 }

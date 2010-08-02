@@ -39,19 +39,25 @@ function load_image(dest, key, url, callback) {
 
 function load_cell_images(callback) {
     load_image(g_cell_images, "cell_1", "cell_1.png", function() {
-	load_image(g_cell_images, "cell_2", "cell_2.png", callback);
+	load_image(g_cell_images, "cell_2", "cell_2.png", function() {
+	    load_image(g_cell_images, "cell_3", "cell_3.png", callback);
+	});
     });
 };
 
 function load_path_images(callback) {
     load_image(g_path_images, "path_0", "path_0.png", function () {
-	load_image(g_path_images, "path_1", "path_1.png", callback);
+	load_image(g_path_images, "path_1", "path_1.png", function () {
+	    load_image(g_path_images, "path_2", "path_2.png", callback);
+	});
     });
 };
 
 function load_overlays(callback) {
     load_image(g_overlays, Move.SINGLE, "overlay_move_0.png", function () {
-	load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", callback);
+	load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", function () {
+	    load_image(g_overlays, Move.KNIGHT, "overlay_move_2.png", callback);
+	});
     });
 };
 
@@ -59,7 +65,9 @@ function load_images(callback) {
     load_cell_images(function () {
 	load_path_images(function () {
 	    load_overlays(function() {
-		load_image(g_images, "player", "player.png", callback);
+		load_image(g_images, "player", "player.png", function () {
+		    load_image(g_images, "forbiden", "banned_cell.png", callback);
+		});
 	    });
 	});
     });
@@ -69,7 +77,7 @@ function draw_cell_image(image, i, j) {
     g_ctx.drawImage(image, j*32, i*32, 32, 32);
 };
 
-function draw_puzzle(puzzle) {
+function draw_puzzle(puzzle, goal) {
     puzzle.each_cells(function (i,j,cell) {
 	var cell_type = cell.type;
 	// Add a div to the main div
@@ -89,6 +97,11 @@ function draw_puzzle(puzzle) {
     });
     
     draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
+
+    if (goal != null && puzzle.is_forbiden(goal)) {
+	draw_cell_image(g_images["forbiden"], goal.i, goal.j);
+    }
+
 };
 
 function build_ui(puzzle) {
@@ -243,8 +256,8 @@ $(document).ready(function(){
 	
 	if (g_path_finder.goal_changed(new_goal)) {
 	    g_path_finder.update_path(g_puzzle, new_goal);
-	    draw_puzzle(g_puzzle);
-	}
+	    draw_puzzle(g_puzzle, new_goal);
+	} 
 	
     });
     

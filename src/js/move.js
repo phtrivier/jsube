@@ -10,6 +10,7 @@ function Move(type) {
 
 Move.SINGLE = 0;
 Move.DOUBLE = 1;
+Move.KNIGHT = 2;
 
 Move.moves = {};
 
@@ -25,6 +26,17 @@ Move.moves[Move.DOUBLE] = function (node) {
 	     { i : node.i -2, j : node.j },
 	     { i : node.i, j : node.j + 2},
 	     { i : node.i, j : node.j -2} ];
+};
+
+Move.moves[Move.KNIGHT] = function (node) {
+    return [ { i :  node.i + 2, j : node.j + 1}, 
+	     { i :  node.i - 2, j : node.j + 1}, 
+	     { i :  node.i + 2, j : node.j - 1}, 
+	     { i :  node.i - 2, j : node.j - 1}, 
+	     { i :  node.i + 1, j : node.j + 2}, 
+	     { i :  node.i - 1, j : node.j + 2}, 
+	     { i :  node.i + 1, j : node.j - 2}, 
+	     { i :  node.i - 1, j : node.j - 2} ];
 };
 
 Move.sp = function (move_type, node) {
