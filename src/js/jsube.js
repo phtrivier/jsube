@@ -163,6 +163,11 @@ function load_puzzle() {
 	var puzzle_struct = PUZZLE_STRUCTS[puzzle_id];
 	res = new Puzzle(puzzle_struct);
 
+	// Put title of the puzzle
+	$("#puzzle-title").empty();
+	$("#puzzle-title").append(res.get_title(g_lang));
+	document.title = "Ube - " + res.get_title(g_lang);
+
 	// Put text in links
 	$("#link_previous").append(i18n[g_lang]["puzzle.previous"]);
 	$("#link_next").append(i18n[g_lang]["puzzle.next"]);

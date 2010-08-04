@@ -7,6 +7,7 @@ function Puzzle(structure) {
 
     this.on_start_messages = null;
     this.on_end_messages = null;
+    this.titles = null;
 
     if (structure != null) {
 	this.load_puzzle_structure(structure);
@@ -22,6 +23,7 @@ Puzzle.prototype.load_puzzle_structure = function (structure) {
 Puzzle.prototype.load_messages = function (structure) {
     this.on_start_messages = structure.on_start;
     this.on_end_messages = structure.on_end;
+    this.titles = structure.title;
 };
 
 Puzzle.prototype.load_moves = function (moves) {
@@ -179,4 +181,18 @@ Puzzle.prototype.cell_at = function (position) {
 Puzzle.prototype.is_forbiden = function (position) {
     var c = this.cell_at(position);
     return (c!= null && c.type != Cell.EMPTY && !c.in_path);
+}
+
+Puzzle.prototype.get_title = function (lg) {
+    var res = null;
+    if (this.titles != null) {
+	res = this.titles[lg];
+	if (res == null) {
+	    res = this.titles["en"];
+	    if (res == null) {
+		res = "";
+	    }
+	}
+    }
+    return res;
 }

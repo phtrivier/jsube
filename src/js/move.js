@@ -29,14 +29,18 @@ Move.moves[Move.DOUBLE] = function (node) {
 };
 
 Move.moves[Move.KNIGHT] = function (node) {
-    return [ { i :  node.i + 2, j : node.j + 1}, 
-	     { i :  node.i - 2, j : node.j + 1}, 
-	     { i :  node.i + 2, j : node.j - 1}, 
-	     { i :  node.i - 2, j : node.j - 1}, 
-	     { i :  node.i + 1, j : node.j + 2}, 
-	     { i :  node.i - 1, j : node.j + 2}, 
-	     { i :  node.i + 1, j : node.j - 2}, 
-	     { i :  node.i - 1, j : node.j - 2} ];
+    var res = [];
+    if (node.depth <= 1) {
+	res = [ { i :  node.i + 2, j : node.j + 1}, 
+		{ i :  node.i - 2, j : node.j + 1}, 
+		{ i :  node.i + 2, j : node.j - 1}, 
+		{ i :  node.i - 2, j : node.j - 1}, 
+		{ i :  node.i + 1, j : node.j + 2}, 
+		{ i :  node.i - 1, j : node.j + 2}, 
+		{ i :  node.i + 1, j : node.j - 2}, 
+		{ i :  node.i - 1, j : node.j - 2} ];
+    }
+    return res
 };
 
 Move.sp = function (move_type, node) {

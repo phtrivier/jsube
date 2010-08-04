@@ -1,7 +1,8 @@
-function Node(i,j,parent) {
-    this.i = i
-    this.j = j
-    this.parent = parent
+function Node(i,j,parent,depth) {
+    this.i = i;
+    this.j = j;
+    this.parent = parent;
+    this.depth = (depth == null ? 0 : depth);
 
     if (parent == null) {
 	this.cost_from_start = 0
@@ -17,10 +18,9 @@ Node.prototype.equals = function (other) {
 Node.prototype.successors = function (puzzle, move_type) {
     var res = []
     var that = this
-    // TODO(pht) : use filtering ? 
     $.each(this.successor_positions(move_type), function (index, position) {
 	if (puzzle.is_reachable(position)) {
-	    var s = new Node(position.i, position.j, that);
+	    var s = new Node(position.i, position.j, that, that.depth + 1);
 	    res.push(s);
 	}
     });
