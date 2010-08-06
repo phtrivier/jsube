@@ -1,13 +1,9 @@
-var g_cell_images = {};
-var g_path_images = {};
-var g_images = {};
-var g_ctx;
 var g_path_finder = new PathFinder;
 var g_command_stack = new CommandStack;
 var g_move_buttons = [];
 var g_puzzle;
-var g_overlays = {}
 var g_lang = "en";
+var g_drawer;
 
 var i18n = { en : { "puzzle.previous" : "Previous puzzle",
 		    "puzzle.next" : "Next puzzle",
@@ -16,17 +12,15 @@ var i18n = { en : { "puzzle.previous" : "Previous puzzle",
 		    "puzzle.next" : "Puzzle suivant",
 		    "puzzle.home" : "Retour" } }
 
-// TODO : move more stuff in the drawer
 function Drawer() {
+    this.cell_images = {};
+    this.path_images = {};
+    this.images = {};
+    this.overlays = {};
+    this.ctx = document.getElementById('playground').getContext('2d');
 };
 
-Drawer.prototype.draw_move_overlay = function (move_type, i , j) {
-    draw_cell_image(g_overlays[move_type], i, j);
-};
-
-var g_drawer = new Drawer;
-
-function load_image(dest, key, url, callback) {
+Drawer.prototype.load_image = function(dest, key, url, callback) {
     var img = new Image();
     img.onload = function() {
 	dest[key] = img;
@@ -37,69 +31,116 @@ function load_image(dest, key, url, callback) {
     img.height = 32;
 };
 
-function load_cell_images(callback) {
-    load_image(g_cell_images, "cell_1", "cell_1.png", function() {
-	load_image(g_cell_images, "cell_2", "cell_2.png", function() {
-	    load_image(g_cell_images, "cell_3", "cell_3.png", callback);
+Drawer.prototype.load_many_images = function (content, callback) {
+    var that = this;
+    var load_helper = function (index) {
+	if (index == content.length) {
+	    callback();
+	} else {
+	    var args = content[index];
+	    that.load_image(args[0], args[1], args[2], function () {
+		load_helper(index+1);
+	    });
+	}
+    };
+    load_helper(0);
+}
+
+Drawer.prototype.load_cell_images = function (callback) {
+
+	      
+    /*
+    this.load_image(this.cell_images, "cell_1", "cell_1.png", function() {
+	this.load_image(this.cell_images, "cell_2", "cell_2.png", function() {
+	    this.load_image(this.cell_images, "cell_3", "cell_3.png", callback);
 	});
     });
+    */
 };
 
-function load_path_images(callback) {
-    load_image(g_path_images, "path_0", "path_0.png", function () {
-	load_image(g_path_images, "path_1", "path_1.png", function () {
-	    load_image(g_path_images, "path_2", "path_2.png", callback);
+Drawer.prototype.load_path_images = function(callback) {
+    /*
+    this.load_image(this.path_images, "path_0", "path_0.png", function () {
+	this.load_image(this.path_images, "path_1", "path_1.png", function () {
+	    this.load_image(this.path_images, "path_2", "path_2.png", callback);
 	});
     });
+    */
 };
 
-function load_overlays(callback) {
-    load_image(g_overlays, Move.SINGLE, "overlay_move_0.png", function () {
-	load_image(g_overlays, Move.DOUBLE, "overlay_move_1.png", function () {
-	    load_image(g_overlays, Move.KNIGHT, "overlay_move_2.png", callback);
+Drawer.prototype.load_overlays = function(callback) {
+    /*
+    this.load_image(this.overlays, Move.SINGLE, "overlay_move_0.png", function () {
+	this.load_image(this.overlays, Move.DOUBLE, "overlay_move_1.png", function () {
+	    this.load_image(this.overlays, Move.KNIGHT, "overlay_move_2.png", callback);
 	});
     });
+    */
 };
 
-function load_images(callback) {
-    load_cell_images(function () {
-	load_path_images(function () {
-	    load_overlays(function() {
-		load_image(g_images, "player", "player.png", function () {
-		    load_image(g_images, "forbiden", "banned_cell.png", callback);
+Drawer.prototype.load_images = function (callback) {
+
+    var content = [ [this.cell_images, "cell_1", "cell_1.png"],
+		    [this.cell_images, "cell_2", "cell_2.png"],
+		    [this.cell_images, "cell_3", "cell_3.png"],
+		    [this.path_images, "path_0", "path_0.png"],
+		    [this.path_images, "path_1", "path_1.png"],
+		    [this.path_images, "path_2", "path_2.png"],
+		    [this.overlays, Move.SINGLE, "overlay_move_0.png"],
+		    [this.overlays, Move.DOUBLE, "overlay_move_1.png"],
+		    [this.overlays, Move.KNIGHT, "overlay_move_2.png"],
+		    [this.images, "player", "player.png"],
+		    [this.images, "forbiden", "banned_cell.png"]
+		  ];
+
+    this.load_many_images(content, callback);
+
+
+    /*
+    this.load_cell_images(function () {
+	this.load_path_images(function () {
+	    this.load_overlays(function() {
+		this.load_image(this.images, "player", "player.png", function () {
+		    this.load_image(this.images, "forbiden", "banned_cell.png", callback);
 		});
 	    });
 	});
     });
+    */
 };
 
-function draw_cell_image(image, i, j) {
-    g_ctx.drawImage(image, j*32, i*32, 32, 32);
+Drawer.prototype.draw_cell_image = function(image, i, j) {
+    this.ctx.drawImage(image, j*32, i*32, 32, 32);
 };
 
-function draw_puzzle(puzzle, goal) {
+Drawer.prototype.draw_move_overlay = function (move_type, i , j) {
+    this.draw_cell_image(this.overlays[move_type], i, j);
+};
+
+Drawer.prototype.draw_puzzle = function(puzzle, goal) {
+    var that = this;
     puzzle.each_cells(function (i,j,cell) {
 	var cell_type = cell.type;
 	// Add a div to the main div
 	if (cell_type != null) {
 	    if (cell_type == Cell.WALKABLE || cell_type == Cell.IN) {
-		draw_cell_image(g_cell_images["cell_1"], i,j);
+		that.draw_cell_image(that.cell_images["cell_1"], i,j);
 	    } else if (cell_type == Cell.OUT) {
-		draw_cell_image(g_cell_images["cell_2"], i,j);
+		that.draw_cell_image(that.cell_images["cell_2"], i,j);
 	    }
 	    
 	    if (cell.in_path) {
-		draw_cell_image(g_path_images["path_" + puzzle.current_move().move_type],i,j);
+		that.draw_cell_image(that.path_images["path_" + puzzle.current_move().move_type],i,j);
 	    }
 	    
 	    cell.draw_overlay(g_drawer, i, j);
 	}
     });
     
-    draw_cell_image(g_images["player"], puzzle.player.i, puzzle.player.j);
+    this.draw_cell_image(this.images["player"], puzzle.player.i, puzzle.player.j);
 
     if (goal != null && puzzle.is_forbiden(goal)) {
-	draw_cell_image(g_images["forbiden"], goal.i, goal.j);
+	this.draw_cell_image(this.images["forbiden"], goal.i, goal.j);
     }
 
 };
@@ -145,7 +186,7 @@ function toggle_enabled(enabled, elem, base) {
 
 function draw_all() {
     draw_ui(g_puzzle);
-    draw_puzzle(g_puzzle);
+    g_drawer.draw_puzzle(g_puzzle);
 };
 
 function prevent_double_click(elem) {
@@ -227,6 +268,8 @@ function next_puzzle() {
 
 $(document).ready(function(){
 
+    g_drawer = new Drawer;
+
     if (navigator.language == "fr") {
 	g_lang = "fr";
     }
@@ -253,15 +296,13 @@ $(document).ready(function(){
 	return;
     }
 
-    g_ctx = document.getElementById('playground').getContext('2d');
-
     $('#playground').bind('mousemove', function (e) {
 	
 	new_goal = get_mouse_position(e);
 	
 	if (g_path_finder.goal_changed(new_goal)) {
 	    g_path_finder.update_path(g_puzzle, new_goal);
-	    draw_puzzle(g_puzzle, new_goal);
+	    g_drawer.draw_puzzle(g_puzzle, new_goal);
 	} 
 	
     });
@@ -287,7 +328,7 @@ $(document).ready(function(){
 	}
     });
 
-    load_images(function () { 
+    g_drawer.load_images(function () { 
 	build_ui(g_puzzle);
 	draw_all();
     });
