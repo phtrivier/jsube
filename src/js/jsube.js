@@ -142,6 +142,11 @@ $(document).ready(function(){
 
     g_puzzle = load_puzzle();
 
+    if (g_puzzle == null) {
+	alert("Unable to load puzzle, sorry");
+	window.location = "jsube.html";
+    }
+
     $("a.transition").click(function (event) {
 	event.preventDefault();
 	linkLocation = this.href;

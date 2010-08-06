@@ -21,8 +21,12 @@ Puzzle.prototype.load_puzzle_structure = function (structure) {
 };
 
 Puzzle.prototype.load_messages = function (structure) {
-    this.on_start_messages = structure.on_start;
-    this.on_end_messages = structure.on_end;
+    if (structure.on_start) {
+	this.on_start_messages = structure.on_start;
+    }
+    if (structure.on_end) {
+	this.on_end_messages = structure.on_end;
+    }
     this.titles = structure.title;
 };
 
