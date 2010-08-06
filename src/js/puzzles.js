@@ -160,6 +160,24 @@ p({title : { fr : 'Encore trop simple ? Voyons voir...',
 	      fr : "Ce tutoriel est maintenant fini. Merci d'avoir jou&eacute; !"},
    moves : [Move.SINGLE, Move.DOUBLE ]});
 
+p({title : { fr : "Qu'entrent les chevaliers !",
+	     en : "Let the knights come !"},
+   rows : ["_____K_-_-___K_-_K____",
+	   "_____-_K_--D--_-_-____",
+	   "_____-----___-----____",
+	   "_____-___________-____",
+	   "_____-____-O-____-____",
+	   "_____-___-___-___-____",
+	   "_____----_____----____",
+	   "______________________",
+	   "________-------_______",
+	   "________---I---_______",
+	   "________-------_______"],
+   on_start : { en : "If you've ever played chess, this new move should ring a bell..",
+		fr : "Les joueurs d'&eacute;checs reconnaitront ce nouveau mouvement..."},
+   moves : [ Move.KNIGHT, Move.SINGLE, Move.DOUBLE]});
+
+/*
 p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	     en : 'Sometimes, you just want to go straight ahead...'},
    rows : ["___---------__________",
@@ -175,3 +193,6 @@ p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	   "______________________"],
 
    moves : [  Move.DOUBLE, Move.KNIGHT, Move.DOUBLE, Move.KNIGHT, Move.DOUBLE ]});
+   */
+
+
