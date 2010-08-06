@@ -46,38 +46,6 @@ Drawer.prototype.load_many_images = function (content, callback) {
     load_helper(0);
 }
 
-Drawer.prototype.load_cell_images = function (callback) {
-
-	      
-    /*
-    this.load_image(this.cell_images, "cell_1", "cell_1.png", function() {
-	this.load_image(this.cell_images, "cell_2", "cell_2.png", function() {
-	    this.load_image(this.cell_images, "cell_3", "cell_3.png", callback);
-	});
-    });
-    */
-};
-
-Drawer.prototype.load_path_images = function(callback) {
-    /*
-    this.load_image(this.path_images, "path_0", "path_0.png", function () {
-	this.load_image(this.path_images, "path_1", "path_1.png", function () {
-	    this.load_image(this.path_images, "path_2", "path_2.png", callback);
-	});
-    });
-    */
-};
-
-Drawer.prototype.load_overlays = function(callback) {
-    /*
-    this.load_image(this.overlays, Move.SINGLE, "overlay_move_0.png", function () {
-	this.load_image(this.overlays, Move.DOUBLE, "overlay_move_1.png", function () {
-	    this.load_image(this.overlays, Move.KNIGHT, "overlay_move_2.png", callback);
-	});
-    });
-    */
-};
-
 Drawer.prototype.load_images = function (callback) {
 
     var content = [ [this.cell_images, "cell_1", "cell_1.png"],
@@ -95,18 +63,6 @@ Drawer.prototype.load_images = function (callback) {
 
     this.load_many_images(content, callback);
 
-
-    /*
-    this.load_cell_images(function () {
-	this.load_path_images(function () {
-	    this.load_overlays(function() {
-		this.load_image(this.images, "player", "player.png", function () {
-		    this.load_image(this.images, "forbiden", "banned_cell.png", callback);
-		});
-	    });
-	});
-    });
-    */
 };
 
 Drawer.prototype.draw_cell_image = function(image, i, j) {
@@ -231,8 +187,6 @@ function load_puzzle() {
 }
 
 function show_message(messages, callback) {
-
-
     $("#dialog-message").empty();
 
     var p = $("<p>");
@@ -241,7 +195,6 @@ function show_message(messages, callback) {
     
     $("#dialog-message").append(p);
 
-    // TODO(pht) : switch language
     $("#dialog-message").dialog({
 	modal: true,
 	width : 400,
@@ -267,7 +220,6 @@ function next_puzzle() {
 }
 
 $(document).ready(function(){
-
     g_drawer = new Drawer;
 
     if (navigator.language == "fr") {
