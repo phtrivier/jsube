@@ -177,22 +177,21 @@ p({title : { fr : "Qu'entrent les chevaliers !",
 		fr : "Les joueurs d'&eacute;checs reconnaitront ce nouveau mouvement..."},
    moves : [ Move.KNIGHT, Move.SINGLE, Move.DOUBLE]});
 
-/*
+/* This one sounded like a good idea, but in the end it does not work ... 
 p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	     en : 'Sometimes, you just want to go straight ahead...'},
    rows : ["___---------__________",
 	   "___-_______-__________",
 	   "___-__________________",
-	   "___S__-----_-_________",
+	   "___D__-----_-_________",
 	   "___-__-_____-_________",
-	   "___-__I_____-------O__",
+	   "___-__I_____------_-O_",
 	   "___S__-_____-_________",
 	   "___-__-----_-_________",
 	   "___-__________________",
 	   "___---------__________",
 	   "______________________"],
 
-   moves : [  Move.DOUBLE, Move.KNIGHT, Move.DOUBLE, Move.KNIGHT, Move.DOUBLE ]});
+   moves : [  Move.DOUBLE, Move.KNIGHT, Move.SINGLE, Move.KNIGHT, Move.SINGLE ]});
    */
-
 
