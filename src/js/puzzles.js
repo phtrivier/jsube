@@ -177,6 +177,24 @@ p({title : { fr : "Qu'entrent les chevaliers !",
 		fr : "Les joueurs d'&eacute;checs reconnaitront ce nouveau mouvement..."},
    moves : [ Move.KNIGHT, Move.SINGLE, Move.DOUBLE]});
 
+p({title : { fr : "Joyeux anniversaire...",
+	     en : "Happy birthday to ju..."},
+   rows : ["___----_________----__",
+	   "______-________-____-_",
+	   "____K--____O___-____-_",
+	   "______-________-____-_",
+	   "___----____-____----__",
+	   "___________-__________",
+	   "____-------_-------___",
+	   "____-_____________-___",
+	   "____-_-----I-----_-___",
+	   "____-_____________-___",
+	   "____---------------___"],
+   on_end : { en : "Happy Birthday, lad !",
+	      fr : "Joyeux anniversaire, Grand !"},
+   moves : [ Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.DOUBLE]});
+
+
 /* This one sounded like a good idea, but in the end it does not work ... 
 p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	     en : 'Sometimes, you just want to go straight ahead...'},
