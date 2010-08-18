@@ -85,12 +85,12 @@ function load_puzzle() {
 	if (puzzle_id > 0) {
 	    $("#link_previous").attr("href", puzzle_href(puzzle_id - 1));
 	} else {
-	    $("#link_previous").remove();
+	    $("#link_previous").css("visibility", "hidden");
 	}
 	if (puzzle_id < (PUZZLE_STRUCTS.length - 1)) {
 	    $("#link_next").attr("href", puzzle_href(puzzle_id + 1));
 	} else {
-	    $("#link_next").remove();
+	    $("#link_next").css("display", "none");
 	}
 
     }

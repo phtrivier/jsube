@@ -12,5 +12,9 @@
 * DONE Implement proper loading of the puzzles
 * DONE Fix bug after consumption of the last 
 * DONE Implement picking up moves along the way
-* TODO Implement startup / end messages
-* TODO Implement finishing a puzzle
+* DONE Implement startup / end messages
+* DONE Implement finishing a puzzle
+* TODO Use blueprintcss to reorganize the in-game view
+* TODO Use blueprintcss to redo the level selection screen
+** Hardcode it
+** Generate the page
