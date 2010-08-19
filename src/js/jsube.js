@@ -34,13 +34,6 @@ function draw_ui(puzzle) {
 };
 
 
-function get_mouse_position(e) {
-    offset = $("#playground").offset();
-    j = Math.floor((e.pageX - offset.left) / 32);
-    i = Math.floor((e.pageY - offset.top) / 32);
-    return { i : i, j : j};
-};
-
 function toggle_enabled(enabled, elem, base) {
     var enabled_class = base + "_enabled";
     var disabled_class = base + "_disabled";
@@ -131,7 +124,7 @@ function next_puzzle() {
 }
 
 $(document).ready(function(){
-    g_drawer = new Drawer;
+    g_drawer = new Drawer(32);
 
     if (navigator.language == "fr") {
 	g_lang = "fr";
@@ -164,19 +157,14 @@ $(document).ready(function(){
 	return;
     }
 
-    $('#playground').bind('mousemove', function (e) {
-	
-	new_goal = get_mouse_position(e);
-	
-	if (g_path_finder.goal_changed(new_goal)) {
-	    g_path_finder.update_path(g_puzzle, new_goal);
-	    g_drawer.draw_puzzle(g_puzzle, new_goal);
+    g_drawer.on_move(function (position) {
+	if (g_path_finder.goal_changed(position)) {
+	    g_path_finder.update_path(g_puzzle, position);
+	    g_drawer.draw_puzzle(g_puzzle, position);
 	} 
-	
     });
-    
-    $('#playground').bind('click', function (e) {
-	mouse_position = get_mouse_position(e);
+
+    g_drawer.on_click(function (mouse_position) {
 	if (g_puzzle.is_in_path(mouse_position)) {
 	    var command = new MoveCommand(g_puzzle, mouse_position);
 	    g_command_stack.execute(command);

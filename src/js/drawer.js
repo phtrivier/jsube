@@ -1,8 +1,14 @@
-function Drawer() {
+function Drawer(cell_size) {
+    if (cell_size != null) {
+	this.cell_size = cell_size;
+    } else {
+	this.cell_size = 32;
+    }
     this.cell_images = {};
     this.path_images = {};
     this.images = {};
     this.overlays = {};
+    // FIXME(pht) : would jquery work ? 
     this.ctx = document.getElementById('playground').getContext('2d');
 }
 
@@ -52,7 +58,7 @@ Drawer.prototype.load_images = function (callback) {
 };
 
 Drawer.prototype.draw_cell_image = function(image, i, j) {
-    this.ctx.drawImage(image, j*32, i*32, 32, 32);
+    this.ctx.drawImage(image, j*this.cell_size, i*this.cell_size, this.cell_size, this.cell_size);
 };
 
 Drawer.prototype.draw_move_overlay = function (move_type, i , j) {
@@ -85,4 +91,27 @@ Drawer.prototype.draw_puzzle = function(puzzle, goal) {
         this.draw_cell_image(this.images["forbiden"], goal.i, goal.j);
     }
 
+};
+
+Drawer.prototype.get_mouse_position = function (e) {
+    offset = $("#playground").offset();
+    j = Math.floor((e.pageX - offset.left) / this.cell_size);
+    i = Math.floor((e.pageY - offset.top) / this.cell_size);
+    return { i : i, j : j};
+};
+
+Drawer.prototype.on_move = function(callback) {
+    var that = this;
+    $("#playground").bind('mousemove', function (e) {
+	position = that.get_mouse_position(e);
+	callback(position);
+    });
+};
+
+Drawer.prototype.on_click = function(callback) {
+    var that = this;
+    $("#playground").bind('click', function (e) {
+	position = that.get_mouse_position(e);
+	callback(position);
+    });
 };
