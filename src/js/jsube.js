@@ -124,6 +124,9 @@ function next_puzzle() {
 }
 
 $(document).ready(function(){
+
+    // TODO(pht) : check that Canvas is supported (and complain appropriately)
+
     g_drawer = new Drawer(32);
 
     if (navigator.language == "fr") {

@@ -6,6 +6,11 @@ html, body {
     color : white;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color : white;
+}
+
+
 .back-link {
     text-align : center;
 }
@@ -44,10 +49,6 @@ a:hover {text-decoration: underline; }
 
 #footer {
     font-size : small;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    color : white;
 }
 
 /* Undo / Redo buttons */

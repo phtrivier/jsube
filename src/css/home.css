@@ -1,0 +1,25 @@
+/* TODO factor this */
+home, body {
+    font-family : Helvetica;
+    background-color : black;
+    color : white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color : white;
+}
+
+
+#header {
+    text-align : center;
+    font-size : medium;
+}
+
+#chapter-navigation {
+    text-align : center;
+    font-size : large;
+}
+
+#level-navigation {
+    font-size : medium;
+}
