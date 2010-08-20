@@ -81,7 +81,7 @@ Drawer.prototype.draw_puzzle = function(puzzle, goal) {
                 that.draw_cell_image(that.path_images["path_" + puzzle.current_move().move_type],i,j);
             }
             
-            cell.draw_overlay(g_drawer, i, j);
+            cell.draw_overlay(that, i, j);
         }
     });
     

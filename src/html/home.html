@@ -11,76 +11,73 @@
     <link type="text/css" rel="stylesheet" href="../css/home.css"/>
   </head>
   <body>
-    <div id="outer" class="container prepend-4">
+
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery.url.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery-ui-1.8.2.custom.min.js"></script>
+    <!-- TODO : compress all files into a big one, zip it, and hope for the
+	 best ... maybe using -->
+    <script type="text/javascript" charset="UTF-8" src="../js/node.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/agenda.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/archive.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/cell.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/puzzle.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/move.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/path_finder.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/move_button.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/command_stack.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/puzzles.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/levels.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/drawer.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/home.js"></script>
+
+    <div id="outer" class="container prepend-4 prepend-top">
 
       <div id="header" class="span-20 last">
 	<h3>Welcome to UBE</h3>
-	<div class="span-12 prepend-4 prepend-top last">
-	  <p>Ube is a puzzle game for everyone. Really, you just have to know
-	  how to count !</p>
-	  <p>You must help a little blue ball (let's call her 'Ube') travel througth our mazes. You have different kind of moves at your disposal. God, is it hard to word this kind of things... 
+	<div class="span-12 prepend-4 last">
+	  <p>Ube is a puzzle game, where you try to reach the exit with only a few moves available.</p>
 	</div>
       </div>
 
       <div id="chapter-navigation" class="span-20 last">
-	<div id="chapter_0" class="span-10"><a href=".">Play Tutorial</a></div>
-	<div id="chapter_1" class="span-10 last"><a href=".">Play Game</a></div>
+	<div id="chapter_0" class="tab-header-selected span-10"><a href=".">Play Tutorial</a></div>
+	<div id="chapter_1" class="tab-header-unselected span-10 last"><a href=".">Play Game</a></div>
       </div>
 
-      <div id="level-navigation" class="span-20 prepend-top last">
+      <div id="level-navigation" class="span-20 last">
 
-	<div id="level-list" class="span-6 bordercol">
-	  <div>Choose a level :</div>
-	  <ul>
-	    <li><a href=".">Pour commencer, trouvez la sortie</a></li>
-	    <li><a href=".">Parfois, il faut savoir sauter</a></li>
-	    <li><a href=".">Un mur. Vous pouvez le passer, croyez moi</a></li>
-	    <li><a href=".">Je sais plus quoi</a></li>
-	    <li><a href=".">Encore un autre truc</a></li>
-	    <li><a href=".">Et puis voila</a></li>
+	<div id="level-list" class="span-6 prepend-top append-bottom">
+	  <h3 class="level-header" >Choose a level :</h3>
+	  <div id="levels" class="span-6">
+	    <div class="level">Pour commencer, trouvez la sortie</div>
+	    <div class="level selected-level span-6 append-1">
+	      Parfois, il faut savoir sauter
+	    </div>
+	    <div class="level">Un mur. Vous pouvez le passer, croyez moi</div>
+	    <div class="level hovered-level span-6 append-1">Je sais plus quoi</div>
+	    <div class="level">Encore un autre truc</div>
+	    <div class="level">Et puis voila</div>
+	  </div>
 	</div>
 	
-	<div id="level-preview" class="span-13 last">
-	  <div>Level preview</div>
-	  <canvas id="playground" width="352px" height="176px"></canvas>
+	<div id="level-preview" class="span-13 last  prepend-top prepend-1 append-bottom">
+	  <h4 class="span-12 last">Level preview</h4>
+	  <!--
+	  <canvas id="playground" class="span-12 append-bottom" width="352px" height="176px"></canvas>
+	  -->
+	  <canvas id="playground" class="span-12 append-bottom" width="352px" height="176px"></canvas>
+
+	  <div class="span-12 prepend-4 append-bottom">
+	    <div class="button span-4 last"><a href=".">Play</a></div>
+	  </div>
 	</div>
 
       </div>
 
-      <div id="footer" class="span-20 last">
+      <div id="footer" class="span-20 last prepend-top">
 	Copyright 2010 - <a href="mailto:phtrivier@yahoo.fr">Pierre-Henri Trivier</a>
       </div>
-
-<!--
-      <div id="navigation" class="span-20">
-	<div class="span-6" id="previous" ><a class="link transition" id="link_previous"></a></div>
-	<div class="span-8 back-link" id="home"><a class="link transition"  id="link_home" href="jsube.html"></a></div>
-	<div class="span-6 last next-link" id="next"><a class="link transition"  id="link_next"></a></div>
-      </div>
-
-      <div id="puzzle-name" class="span-20 prepend-top">
-	<h3 id="puzzle-title">...Veuillez patienter...</h3>
-      </div>
-
-      <div id="game" class="span-20 prepend-1">
-
-	<canvas id="playground" width="704px" height="352px"></canvas>
-	
-	<div id="undo-redo" class="span-4 prepend-top last">
-	  <div id="undo" class="span-2 undo_disabled"></div>
-	  <div id="redo" class="span-2 last redo_disabled"></div>
-	</div>
-	<div id="moves" class="span-16 prepend-top"></div>
-      </div>
-
-      <div id="footer" class="span-20 prepend-top">
-	Copyright (C) 2010 - Pierre-Henri Trivier
-      </div>
-
-    </div>
-
-    <div id="dialog-message"></div>
--->
 
   </body>
 </html>
