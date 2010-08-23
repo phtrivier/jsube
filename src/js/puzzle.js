@@ -204,3 +204,9 @@ Puzzle.prototype.get_title = function (lg) {
     }
     return res;
 }
+
+Puzzle.prototype.set_cell_at = function(position, cell) {
+    if (this.is_valid_cell(position)) {
+	this.cells[position.i][position.j] = cell;
+    }
+}
