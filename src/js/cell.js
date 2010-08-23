@@ -12,6 +12,10 @@ Cell.prototype.undo_script = function (puzzle) {
 Cell.prototype.draw_overlay = function (drawer,i,j) {
 };
 
+Cell.prototype.is_empty = function () {
+    return (this.type == Cell.EMPTY);
+}
+
 Cell.EMPTY = 0;
 Cell.IN = 1;
 Cell.WALKABLE = 2;

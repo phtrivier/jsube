@@ -175,9 +175,13 @@ Puzzle.prototype.is_finished = function () {
 }
 
 Puzzle.prototype.cell_at = function (position) {
+    return this.cell(position.i, position.j);
+}
+
+Puzzle.prototype.cell = function (i,j) {
     var res = null;
-    if (this.cells[position.i] != null) {
-	res = this.cells[position.i][position.j];
+    if (this.cells[i] != null) {
+	res = this.cells[i][j];
     }
     return res;
 }
