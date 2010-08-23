@@ -255,7 +255,13 @@ Puzzle.prototype.print_rows = function () {
 	}
 	res = res + "\"";
 	$.each(row, function (j, cell) {
-	    res = res + that.print_cell(cell);
+	    
+	    if (i == that.player.i &&
+		j == that.player.j) {
+		res = res + "*"
+	    } else {
+		res = res + that.print_cell(cell);
+	    }
 	});
 	res = res + "\"";
 	if (i == that.cells.length -1) {

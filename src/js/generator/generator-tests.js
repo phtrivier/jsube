@@ -1,4 +1,40 @@
 $(document).ready(function () {
+
+    test("Step actions are only done once", function () {
+
+	s = {title : { fr : 'Template',
+		       en : 'Template'
+	     },
+	     rows : ["_____",
+		     "_____",
+		     "__I__",
+		     "_____",
+		     "_____"],
+	     moves : []}
+	
+	p = new Puzzle(s);
+
+	var count = function (p, i, j) {
+	    return p.cells[i+2][j].type + 
+		p.cells[i-2][j].type + 
+		p.cells[i][j+2].type + 
+		p.cells[i][j-2].type
+	};
+
+	p.player = { i : 2, j : 2 };
+
+	equals(count(p, 2, 2), 0, "should be null at startup");
+
+	g = new StepAction(Move.DOUBLE, 1);
+
+	g.make_step(p);
+
+	equals(count(p,2,2), 2, "there should be exactly one non empty position");
+
+	console.log(p.to_string());
+
+    });
+
     test("Step Action single move test", function() {
 
 	s = {title : { fr : 'Template',

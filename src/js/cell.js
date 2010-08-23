@@ -61,3 +61,7 @@ MoveCell.prototype.letter = function () {
     }
     }
 }
+
+MoveCell.prototype.is_empty = function () {
+    return false;
+}
