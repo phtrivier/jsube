@@ -54,3 +54,22 @@ Move.prototype.use = function () {
 Move.prototype.revert = function () {
     this.available = true;
 }
+
+Move.prototype.long_name = function () {
+    return Move.to_long_name(this.move_type);
+}
+
+Move.to_long_name = function (move_type) {
+    switch (move_type) {
+    case (Move.SINGLE) : {
+	return "Move.SINGLE"
+    }
+    case (Move.DOUBLE) : {
+	return "Move.DOUBLE"
+    }
+    case (Move.KNIGHT) : {
+	return "Move.KNIGHT"
+    }
+    };
+};
+

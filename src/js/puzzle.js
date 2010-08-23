@@ -210,3 +210,59 @@ Puzzle.prototype.set_cell_at = function(position, cell) {
 	this.cells[position.i][position.j] = cell;
     }
 }
+
+Puzzle.prototype.to_string = function () {
+    res = this.print_rows();
+    res = res + ",\n" + this.print_moves();
+    return res;
+}
+
+Puzzle.prototype.print_moves = function () {
+    res = "moves : [" + 
+	$.map(this.moves, function (item, index) {
+	    return item.long_name();
+	}).join(",") + "]";
+    return res;
+}
+
+Puzzle.prototype.print_cell = function (cell) {
+    if (cell.pickable) {
+	return cell.letter();
+    } else {
+	switch(cell.type) {
+	case(Cell.IN) : {
+	    return "I";
+	}
+	case (Cell.OUT) : {
+	    return "O";
+	}
+	case (Cell.WALKABLE) : {
+	    return "-";
+	}
+	case (Cell.EMPTY) : {
+	    return "_";
+	}
+	}
+    }
+}
+
+Puzzle.prototype.print_rows = function () {
+    res = "rows : [";
+    var that = this;
+    $.each(this.cells, function (i, row) {
+	if (i != 0) {
+	    res = res + "        ";
+	}
+	res = res + "\"";
+	$.each(row, function (j, cell) {
+	    res = res + that.print_cell(cell);
+	});
+	res = res + "\"";
+	if (i == that.cells.length -1) {
+	    res = res + "]";
+	} else {
+	    res = res + ",\n";
+	}
+    });
+    return res;
+}

@@ -47,3 +47,17 @@ MoveCell.prototype.draw_overlay = function (drawer, i , j) {
 	drawer.draw_move_overlay(this.move_type, i, j);
     }
 };
+
+MoveCell.prototype.letter = function () {
+    switch(this.move_type) {
+    case (Move.SINGLE) : {
+	return "S";
+    }
+    case (Move.DOUBLE) : {
+	return "D";
+    }
+    case (Move.KNIGHT) : {
+	return "K";
+    }
+    }
+}

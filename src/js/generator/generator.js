@@ -1,8 +1,29 @@
-StepAction = function (move_type) {
+load("../lib/env.rhino.js");
+load("../lib/jquery-1.4.2.min.js");
+load("../lib/jquery.shuffle.js");
+load("../lib/jsDump.js")
+
+load("../cell.js");
+load("../move.js");
+load("../puzzle.js");
+
+StepAction = function (move_type, step_count) {
     this.move_type = move_type;
+    this.step_count = step_count;
+}
+
+StepAction.prototype.to_string = function () {
+    return "Step : " + Move.to_long_name(this.move_type) + ", " + this.step_count + " times";
 }
 
 StepAction.prototype.execute = function (puzzle) {
+    var step_made = false;
+    for (var i = 0 ; i < this.step_count ; i++) {
+	step_made = step_made || this.make_step(puzzle);
+    }
+    if (step_made) {
+	this.consume_move(puzzle);
+    }
 }
 
 // If a move is available, consume it, otherwise create it.
@@ -50,6 +71,10 @@ AddMoveAction.prototype.execute = function (puzzle) {
     }
 };
 
+AddMoveAction.prototype.to_string = function () {
+    return "Add Move " + Move.to_long_name(this.move_type);
+}
+
 ExitAction = function() {
 };
 
@@ -58,6 +83,10 @@ ExitAction.prototype.execute = function (puzzle) {
     if (current.type != Cell.IN && !current.pickable) {
 	puzzle.set_cell_at(puzzle.player, new Cell(Cell.OUT));
     }
+}
+
+ExitAction.prototype.to_string = function () {
+    return "Put exit";
 }
 
 Generator = function () {
@@ -81,7 +110,82 @@ Generator.prototype.generate = function () {
 		 "______________________"],
  	 moves : []}
 
-    p = new Puzzle(p);
+    p = new Puzzle(s);
 
+    var i = this.up_to(10);
+    var j = this.up_to(10);
+
+    p.player = { i : i, j : j };
+    p.set_cell_at(p.player, new Cell(Cell.IN));
+
+    actions = this.pick_actions();
+
+    $.each(actions, function (index, action) {
+	console.log(action.to_string());
+	action.execute(p);
+    });
+
+    return p;
 }
 
+Generator.prototype.up_to = function (k) {
+    return Math.round(Math.random() * k);
+}
+
+Generator.prototype.pick_actions = function () {
+
+    var res = [];
+    var finished = false;
+
+    while (!finished) {
+	
+	var dice = Math.random() * 100;
+
+	if (dice < 70) {
+	    // Generate a move
+	    var move_type = this.up_to(2);
+	    var step_count = 0;
+	    switch(step_count) {
+	    case (Move.SINGLE) : {
+		step_count = this.up_to(10);
+		break;
+	    }
+	    case (Move.DOUBLE) : {
+		step_count = this.up_to(5);
+		break;
+	    }
+	    case (Move.KNIGHT) : {
+		step_count = this.up_to(2);
+		break;
+	    }
+	    }
+	    var toAdd = new StepAction(move_type, step_count);
+	    res.push(toAdd);
+
+	} else if (dice < 80) {
+	    // Generate a pickable move
+	    var move_type = this.up_to(2);
+	    res.push(new AddMoveAction(move_type));
+	} else if (res.length > 5) {
+	    finished = true;
+	}
+
+	if (res.length >= 10) {
+	    finished = true;
+	}
+
+    }
+
+    res.push(new ExitAction());
+
+    return res;
+}
+
+window.location = "../../html/in-game.html"
+$(document).ready(function () {
+
+    var g = new Generator();
+    p = g.generate();
+    console.log(p.to_string());
+
+});
