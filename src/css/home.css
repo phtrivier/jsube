@@ -100,6 +100,20 @@ a:hover {text-decoration: underline; }
 
 .level {
     padding-top : 3px;
-    padding-bottom : 3px;
     padding-left : 3px;
 }
+
+#levels {
+    padding-left: 0;
+    margin-left: 0;
+    border-bottom: 1px solid gray;
+}
+
+#levels li
+{
+    list-style: none;
+    margin: 0;
+    padding: 0.25em;
+    border-top: 1px solid gray;
+}
+
