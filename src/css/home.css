@@ -24,12 +24,12 @@ h1, h2, h3, h4, h5, h6 {
     font-size : medium;
 }
 
-.selected-level {
-    background-color : #000070;
-}
-
 .hovered-level {
     background-color : #00A3A3;
+}
+
+.selected-level {
+    background-color : #000070;
 }
 
 #level-preview {
@@ -106,14 +106,20 @@ a:hover {text-decoration: underline; }
 #levels {
     padding-left: 0;
     margin-left: 0;
-    border-bottom: 1px solid gray;
+/*    border-bottom: 1px solid gray; */
 }
 
 #levels li
 {
+    cursor : default;
     list-style: none;
     margin: 0;
     padding: 0.25em;
     border-top: 1px solid gray;
+    /* Just a bit more than span-7 */
+    width : 275px;
 }
 
+#levels-header {
+    cursor : default;
+}
