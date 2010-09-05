@@ -12,6 +12,10 @@ function Drawer(cell_size) {
     this.ctx = document.getElementById('playground').getContext('2d');
 }
 
+Drawer.prototype.clear = function () {
+    this.ctx.clearRect(0,0,352,176);
+}
+
 Drawer.prototype.load_image = function(dest, key, url, callback) {
     var img = new Image();
     img.onload = function() {

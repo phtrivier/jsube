@@ -8,8 +8,14 @@ g_home_i18n = {
 };
 
 Home = function () {
+    this.drawer = new Drawer(16);
+    this.puzzle = null;
 }
     
+Home.prototype.puzzle_href = function (puzzle_id) {
+    return "in-game.html?puzzle_id=" + puzzle_id;
+}
+
 Home.prototype.load_translated_text = function(lg) {
 	$('#levels-header').append(g_home_i18n[lg]['level.choose']);
 	$('#levels-header').mousedown(function (event) {
@@ -24,13 +30,17 @@ Home.prototype.on_level_selected = function(li, level_index) {
 	$(this).removeClass('selected-level');
     });
     li.removeClass('hovered-level').addClass('selected-level')
-    // TODO : Display the preview if it makes sense
+
+    this.puzzle = new Puzzle(PUZZLE_STRUCTS[level_index]);
+    this.drawer.clear();
+    this.drawer.draw_puzzle(this.puzzle);
+    $("#play").attr("href", this.puzzle_href(level_index));
 }
 
 Home.prototype.load_tutorial_level_list = function(lg) {
     $("#levels").empty();
     var that = this;
-    for (var i = 0 ; i < 7 ; i++) {
+    for (var i = 0 ; i < 8 ; i++) {
 
 	var levelDiv = $("<li class='level' id='level_link_" + i + "'></li>");
 	levelDiv.append(PUZZLE_STRUCTS[i].title[lg]);
@@ -58,16 +68,11 @@ Home.prototype.load_tutorial_level_list = function(lg) {
 }
 
 $(document).ready(function(){
-    var drawer = new Drawer(16);
-
-    var p = new Puzzle(PUZZLE_STRUCTS[2]);
-   
-    drawer.load_images(function () {
+    var h = new Home
+    h.drawer.load_images(function () {
 	var lg = get_lg();
-	var h = new Home
 	h.load_translated_text(lg);
 	h.load_tutorial_level_list(lg);
-	// drawer.draw_puzzle(p);
     });
 
 });
