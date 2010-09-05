@@ -10,6 +10,7 @@ g_home_i18n = {
 Home = function () {
     this.drawer = new Drawer(16);
     this.puzzle = null;
+    this.has_puzzle = false;
 }
     
 Home.prototype.puzzle_href = function (puzzle_id) {
@@ -34,7 +35,16 @@ Home.prototype.on_level_selected = function(li, level_index) {
     this.puzzle = new Puzzle(PUZZLE_STRUCTS[level_index]);
     this.drawer.clear();
     this.drawer.draw_puzzle(this.puzzle);
-    $("#play").attr("href", this.puzzle_href(level_index));
+
+    if (!this.has_puzzle) {
+	$("#preview_stub").remove();
+	var play_div = $("<div id='play' class='button span-4 last'><div>");
+	play_div.append("<a id='play_link'>Play</a>");
+	$("#preview_footer").append(play_div);
+	this.has_puzzle = true;
+    }
+
+    $("#play_link").attr("href", this.puzzle_href(level_index));
 }
 
 Home.prototype.load_tutorial_level_list = function(lg) {
