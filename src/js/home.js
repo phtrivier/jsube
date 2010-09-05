@@ -7,27 +7,32 @@ g_home_i18n = {
 	     "play" : "Jouer"  } 
 };
 
-function load_translated_text(lg) {
-    $('#levels-header').append(g_home_i18n[lg]['level.choose']);
-    $('#levels-header').mousedown(function (event) {
-	if (event.preventDefault) {
-	    event.preventDefault();
-	}
-    });
+Home = function () {
 }
+    
+Home.prototype.load_translated_text = function(lg) {
+	$('#levels-header').append(g_home_i18n[lg]['level.choose']);
+	$('#levels-header').mousedown(function (event) {
+	    if (event.preventDefault) {
+		event.preventDefault();
+	    }
+	});
+    }
 
-function on_level_selected(li) {
-    $("#levels > li").each(function (index) {
+Home.prototype.on_level_selected = function(li, level_index) {
+    $("#levels > li").each(function (k) {
 	$(this).removeClass('selected-level');
     });
     li.removeClass('hovered-level').addClass('selected-level')
+    // TODO : Display the preview if it makes sense
 }
 
-function load_tutorial_level_list(lg) {
+Home.prototype.load_tutorial_level_list = function(lg) {
     $("#levels").empty();
+    var that = this;
     for (var i = 0 ; i < 7 ; i++) {
 
-	var levelDiv = $("<li class='level'></li>");
+	var levelDiv = $("<li class='level' id='level_link_" + i + "'></li>");
 	levelDiv.append(PUZZLE_STRUCTS[i].title[lg]);
 	
 	levelDiv.hover(function (event) {
@@ -39,8 +44,8 @@ function load_tutorial_level_list(lg) {
 			   $(this).removeClass('hovered-level');
 		       });
 	
-	levelDiv.click(function (event) {
-	    on_level_selected($(this));
+	levelDiv.bind('click', { index : i}, function (event) {
+	    that.on_level_selected($(this), event.data.index);
 	});
 	
 	levelDiv.mousedown(function (event) {
@@ -48,7 +53,6 @@ function load_tutorial_level_list(lg) {
 		event.preventDefault();
 	    }
 	});
-
 	$("#levels").append(levelDiv);
     }
 }
@@ -60,8 +64,9 @@ $(document).ready(function(){
    
     drawer.load_images(function () {
 	var lg = get_lg();
-	load_translated_text(lg);
-	load_tutorial_level_list(lg);
+	var h = new Home
+	h.load_translated_text(lg);
+	h.load_tutorial_level_list(lg);
 	// drawer.draw_puzzle(p);
     });
 
