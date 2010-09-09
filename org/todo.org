@@ -19,8 +19,8 @@
 ** DONE Hardcode it
 ** DONE Generate the page
 * TODO Various cleanups
-  + [ ] Make sure every string is translated
+  + [X] Make sure every string is translated
   + [ ] Add a check so that if the canvas is not supported, 
 	an error occurs
-  + [ ] Remove the older 'jsube.js'
+  + [X] Remove the older 'jsube.html'
 	

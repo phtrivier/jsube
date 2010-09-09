@@ -125,6 +125,8 @@ function next_puzzle() {
 
 $(document).ready(function(){
 
+    new CanvasChecker().check_canvas();
+
     // TODO(pht) : check that Canvas is supported (and complain appropriately)
 
     g_drawer = new Drawer(32);
@@ -139,8 +141,8 @@ $(document).ready(function(){
     g_puzzle = load_puzzle();
 
     if (g_puzzle == null) {
-	alert("Unable to load puzzle, sorry");
-	window.location = "jsube.html";
+	alert("Unable to load puzzle, sorry.");
+	window.location = "home.html";
     }
 
     $("a.transition").click(function (event) {

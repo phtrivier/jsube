@@ -1,9 +1,21 @@
 g_home_i18n = {
     "en" : { "level.choose" : "Choose a level",
 	     "level.preview" : "Level preview",
-	     "play" : "Play"   },
+	     "welcome" : "Welcome to UBE",
+	     "intro" : "Ube is a puzzle game, where you try to reach the exit with only a few moves available.",
+	     "play.tutorial" : "Play tutorial",
+	     "play.game" : "Play game (coming soon !)",
+	     "level.preview" : "Level preview",
+	     "level.preview.stub" : "Click on a level name to display a preview",
+	     "play" : "Play"},
     "fr" : { "level.choose" : "Choisissez un niveau",
 	     "level.preview" : "Aperçu du niveau",
+	     "welcome": "Bienvenue dans UBE",
+	     "intro" : "Ube est un casse-tête. Vous devez atteindre la sortie d'un labyrinthe, mais seuls certains mouvements sont possibles !",
+	     "play.tutorial" : "Tutoriel",
+	     "play.game" : "Jeu complet (c'est pour bientôt !)",
+	     "level.preview" : "Aperçu du niveau",
+	     "level.preview.stub" : "Cliquez sur le titre d'un niveau pour afficher un aperçu",
 	     "play" : "Jouer"  } 
 };
 
@@ -17,14 +29,25 @@ Home.prototype.puzzle_href = function (puzzle_id) {
     return "in-game.html?puzzle_id=" + puzzle_id;
 }
 
+Home.prototype.append_i18n = function (selector, lg, key) {
+    $(selector).append(g_home_i18n[lg][key]);
+}
+
 Home.prototype.load_translated_text = function(lg) {
-	$('#levels-header').append(g_home_i18n[lg]['level.choose']);
-	$('#levels-header').mousedown(function (event) {
-	    if (event.preventDefault) {
-		event.preventDefault();
-	    }
-	});
-    }
+    this.append_i18n('#welcome', lg, "welcome");
+    this.append_i18n('#intro', lg, "intro");
+    this.append_i18n('#chapter_0', lg, "play.tutorial");
+    this.append_i18n('#chapter_1', lg, "play.game");
+    this.append_i18n("#levels-header", lg, "level.choose");
+    this.append_i18n("#level-preview-header", lg, "level.preview");
+    this.append_i18n("#preview-stub", lg, "level.preview.stub");
+
+    $('#levels-header').mousedown(function (event) {
+	if (event.preventDefault) {
+	    event.preventDefault();
+	}
+    });
+}
 
 Home.prototype.on_level_selected = function(li, level_index) {
     $("#levels > li").each(function (k) {
@@ -37,10 +60,11 @@ Home.prototype.on_level_selected = function(li, level_index) {
     this.drawer.draw_puzzle(this.puzzle);
 
     if (!this.has_puzzle) {
-	$("#preview_stub").remove();
+	$("#preview-stub").remove();
 	var play_div = $("<div id='play' class='button span-4 last'><div>");
-	play_div.append("<a id='play_link'>Play</a>");
-	$("#preview_footer").append(play_div);
+	play_div.append("<a id='play_link'></a>");
+	$("#preview-footer").append(play_div);
+	this.append_i18n("#play_link", get_lg(), "play");
 	this.has_puzzle = true;
     }
 
@@ -78,6 +102,9 @@ Home.prototype.load_tutorial_level_list = function(lg) {
 }
 
 $(document).ready(function(){
+
+    new CanvasChecker().check_canvas();
+
     var h = new Home
     h.drawer.load_images(function () {
 	var lg = get_lg();

@@ -30,37 +30,37 @@
     <script type="text/javascript" charset="UTF-8" src="../js/levels.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../js/drawer.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../js/i18n.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/canvas_checker.js"></script>
     <script type="text/javascript" charset="UTF-8" src="../js/home.js"></script>
 
     <div id="outer" class="container prepend-4 prepend-top">
 
       <div id="header" class="span-20 last">
-	<h3>Welcome to UBE</h3>
+	<h3 id="welcome"></h3>
 	<div class="span-12 prepend-4 last">
-	  <p>Ube is a puzzle game, where you try to reach the exit with only a few moves available.</p>
+	  <p id="intro"></p>
 	</div>
       </div>
 
       <div id="chapter-navigation" class="span-20 last">
-	<div id="chapter_0" class="tab-header-selected span-10 selected-chapter">Play Tutorial</div>
-	<div id="chapter_1" class="tab-header-unselected span-10 last unselected-chapter">Play Game (Coming soon)</div>
+	<div id="chapter_0" class="tab-header-selected span-10 selected-chapter"></div>
+	<div id="chapter_1" class="tab-header-unselected span-10 last unselected-chapter"></div>
       </div>
 
       <div id="level-navigation" class="span-21 last">
 
 	<div id="level-list" class="span-7 prepend-top append-bottom">
-	  <h3 id='levels-header'></h3>
+	  <h3 id="levels-header"></h3>
 	  <ul id="levels" class="span-7 last">
 	  </ul>
 	</div>
 	
 	<div id="level-preview" class="span-13 last  prepend-top prepend-1 append-bottom">
-	  <h4 class="span-12 last">Level preview</h4>
+	  <h4 id="level-preview-header" class="span-12 last"></h4>
 	  <canvas id="playground" class="span-12 append-bottom" width="352px" height="176px"></canvas>
-	  <div id="preview_stub" class="span-12">
-	    Click on a level name to display a preview
+	  <div id="preview-stub" class="span-12">
 	  </div>
-	  <div id="preview_footer" class="span-12 prepend-4 append-bottom">
+	  <div id="preview-footer" class="span-12 prepend-4 append-bottom">
 	  </div>
 	</div>
       </div>
