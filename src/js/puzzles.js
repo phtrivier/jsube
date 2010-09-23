@@ -100,6 +100,9 @@ p({title : { fr : "Vous trouverez une solution en chemin...",
 	   "________-__-__-_______",
 	   "___________-__________"],
 
+   on_end : {en : "You can pick up new moves in a puzzle. Try reaching the yellow cell in the middle."
+	     fr : "Vous pouvez récupérer des mouvements supplémentaires en cours de route. Essayez d'atteindre la case du milieu..."},
+
    moves : [Move.SINGLE, Move.SINGLE ]});
 
 p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.',
@@ -177,6 +180,22 @@ p({title : { fr : "Qu'entrent les chevaliers !",
 		fr : "Les joueurs d'&eacute;checs reconnaitront ce nouveau mouvement..."},
    moves : [ Move.KNIGHT, Move.SINGLE, Move.DOUBLE]});
 
+p({title : { fr : "Give me a happy face !",
+	     en : ""},
+   rows : ["______-K-------______",
+	   "_____-_________-_____",
+	   "____-____-_-____-____",
+	   "____-___--_--___-____",
+	   "____-___-I_-O___-____",
+	   "____-_K__-_-__-_-____",
+	   "____-_-_______-_-____",
+	   "____S__-_____K__-____",
+	   "_____-__-D---__-_____",
+	   "_____-_________-_____" ,
+	   "______-------K-______"],
+
+   moves : [ Move.DOUBLE, Move.DOUBLE, Move.DOUBLE ]});
+
 p({title : { fr : "Joyeux anniversaire...",
 	     en : "Happy birthday to ju..."},
    rows : ["___----_________----__",
@@ -190,10 +209,7 @@ p({title : { fr : "Joyeux anniversaire...",
 	   "____-_-----I-----_-___",
 	   "____-_____________-___",
 	   "____---------------___"],
-   on_end : { en : "Happy Birthday, lad !",
-	      fr : "Joyeux anniversaire, Grand !"},
    moves : [ Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.DOUBLE]});
-
 
 /* This one sounded like a good idea, but in the end it does not work ... 
 p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
