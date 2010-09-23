@@ -2,6 +2,7 @@
 
 html, body {
     height : 98%;
+    font-family : Helvetica;
 }
 
 #wrapper {
@@ -119,10 +120,15 @@ body {
     margin-left : 20px;
 }
 
-a:link {text-decoration: none ; color : white}
-a:visited {text-decoration: none ; color : white}
-a:active {text-decoration: none ; color : white}
+a:link {text-decoration: none ; color : white;}
+a:visited {text-decoration: none ; color : white;}
+a:active {text-decoration: none ; color : white;}
+a:focus {text-decoration: underline; color: white;}
 a:hover {text-decoration: underline; color: white;}
+
+a:focus, a:hover {
+    color : white;
+}
 
 #navigation {
     text-align : center;
@@ -139,3 +145,5 @@ a:hover {text-decoration: underline; color: white;}
 h3 {
     text-align : center;
 }
+
+

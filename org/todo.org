@@ -12,5 +12,15 @@
 * DONE Implement proper loading of the puzzles
 * DONE Fix bug after consumption of the last 
 * DONE Implement picking up moves along the way
-* TODO Implement startup / end messages
-* TODO Implement finishing a puzzle
+* DONE Implement startup / end messages
+* DONE Implement finishing a puzzle
+* DONE Use blueprintcss to reorganize the in-game view
+* DONE Use blueprintcss to redo the level selection screen
+** DONE Hardcode it
+** DONE Generate the page
+* TODO Various cleanups
+  + [X] Make sure every string is translated
+  + [ ] Add a check so that if the canvas is not supported, 
+	an error occurs
+  + [X] Remove the older 'jsube.html'
+	
