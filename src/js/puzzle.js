@@ -73,6 +73,9 @@ Puzzle.prototype.load_cells = function (rows) {
 	    case 'K':
 		cell = new MoveCell(Move.KNIGHT);
 		break;
+	    case 'T' : 
+		cell = new MoveCell(Move.TRIPLE);
+		break;
 	    }
 	    that.cells[i][j] = cell;
 	});
