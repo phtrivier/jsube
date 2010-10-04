@@ -57,35 +57,44 @@ function prevent_double_click(elem) {
     });
 }
 
+function set_title(puzzle, puzzle_id) {
+    // Put title of the puzzle
+    $("#puzzle-title").empty();
+    $("#puzzle-title").append(puzzle.get_title(g_lang));
+    document.title = "Ube - " + puzzle.get_title(g_lang);
+}
+
+function set_links(puzzle_id) {
+    // Put text in links
+    $("#link_previous").append(i18n[g_lang]["puzzle.previous"]);
+    $("#link_next").append(i18n[g_lang]["puzzle.next"]);
+    $("#link_home").append(i18n[g_lang]["puzzle.home"]);
+    
+    // Load links
+    if (puzzle_id > 0) {
+	$("#link_previous").attr("href", puzzle_href(puzzle_id - 1));
+    } else {
+	$("#link_previous").css("visibility", "hidden");
+    }
+    if (puzzle_id < (PUZZLE_STRUCTS.length - 1)) {
+	$("#link_next").attr("href", puzzle_href(puzzle_id + 1));
+    } else {
+	$("#link_next").css("display", "none");
+    }
+}
+
 function load_puzzle() {
     var res = null;
     var puzzle_id = parseInt($.url.param("puzzle_id"));
     if (puzzle_id < PUZZLE_STRUCTS.length) {
 	var puzzle_struct = PUZZLE_STRUCTS[puzzle_id];
 	res = new Puzzle(puzzle_struct);
-
-	// Put title of the puzzle
-	$("#puzzle-title").empty();
-	$("#puzzle-title").append(res.get_title(g_lang));
-	document.title = "Ube - " + res.get_title(g_lang);
-
-	// Put text in links
-	$("#link_previous").append(i18n[g_lang]["puzzle.previous"]);
-	$("#link_next").append(i18n[g_lang]["puzzle.next"]);
-	$("#link_home").append(i18n[g_lang]["puzzle.home"]);
-	
-	// Load links
-	if (puzzle_id > 0) {
-	    $("#link_previous").attr("href", puzzle_href(puzzle_id - 1));
-	} else {
-	    $("#link_previous").css("visibility", "hidden");
-	}
-	if (puzzle_id < (PUZZLE_STRUCTS.length - 1)) {
-	    $("#link_next").attr("href", puzzle_href(puzzle_id + 1));
-	} else {
-	    $("#link_next").css("display", "none");
-	}
-
+	set_title(res);
+	set_links(puzzle_id);
+    } else if (EASTER_EGGS[puzzle_id] != null) {
+	// Ok, I want to keep the easter eggs for later ... and am I pretty sure someone will check ... 
+	res = new Puzzle(EASTER_EGGS[puzzle_id]);
+	set_title(res);
     }
     return res;
 }

@@ -40,7 +40,7 @@ p({title : { fr : 'Un mur. Vous pouvez le passer, croyez moi.',
 	   "_________-_-----------"],
 
    on_start : {en : "The buttons at the bottom are your possible moves. The yellow moves lets you move two cells at a time. You'll need it",
-	       fr : "Les bouttons en bas de l'&eacute;cran sont vos diff&eacute;rents mouvements possibles. Avec le jaune, vous pouvez avancer de deux cases &agrave; la fois. Vous en aurez besoin..."},
+	       fr : "Les boutons en bas de l'&eacute;cran sont vos diff&eacute;rents mouvements possibles. Avec le jaune, vous pouvez avancer de deux cases &agrave; la fois. Vous en aurez besoin..."},
 
    moves : [Move.SINGLE, Move.SINGLE, Move.DOUBLE]});
 
@@ -81,9 +81,11 @@ p({title : { fr : 'Compliquons un peu. Juste un peu.',
 	   "___-___-___________-__",
 	   "___-----___________--O"],
 
+   on_start : {en : "It you feel stuck on a puzzle, just use the links on the top of the screen to try another one. No reason to feel frustrated, it's just a game ;)", 		fr : "Si vous &ecirc;tes bloqu&eacute; sur un puzzle, vous pouvez utiliser les liens en haut de l'&eacute;cran pour passer au suivant. On va pas se prendre la t&ecirc;te pour un jeu ;)"},
+
+
    on_end : {en : "You're starting to get it ! Let's continue...",
 	     fr : "Vous avez compris le truc ! Continuons..."},
-
 
    moves : [Move.DOUBLE, Move.SINGLE, Move.SINGLE ]});
 
@@ -106,25 +108,6 @@ p({title : { fr : "Vous trouverez une solution en chemin...",
 	       fr : "Vous pouvez r&eacute;cup&eacute;rer des mouvements suppl&eacute;mentaires en cours de route. Essayez d'atteindre la case jaune au milieu..."},
 
    moves : [Move.SINGLE, Move.SINGLE ]});
-
-p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.',
-	     en : "Be wise. Clock-wise..."
-	   },
-   rows : ["______________________",
-	   "__---____________---__",
-	   "_--D----------_--S---_",
-	   "_-----__________-----_",
-	   "___-_____-----___-____",
-	   "___-____---O---__-____",
-	   "___-_____-----___-____",
-	   "_-----__________----__",
-	   "_--I--_____------D--__",
-	   "__---____________--___",
-	   "______________________"],
-
-   on_start :{en : "Sometimes, there is more than one solution...",
-	      fr : "Parfois, il y a plusieurs solutions..."},
-   moves : [Move.SINGLE, Move.SINGLE]});
 
 p({title : { fr : "Ca a l'air facile ? Regardez bien..." ,
 	     en : "Looking simple ? Look again..."
@@ -164,6 +147,25 @@ p({title : { fr : 'Encore trop simple ? Voyons voir...',
    on_end : { en : "This tutorial is now over. Thanks for playing !",
 	      fr : "Ce tutoriel est maintenant fini. Merci d'avoir jou&eacute; !"},
    moves : [Move.SINGLE, Move.DOUBLE ]});
+
+p({title : { fr : 'Du bon sens. Celui des aiguilles, par exemple.',
+	     en : "Be wise. Clock-wise..."
+	   },
+   rows : ["______________________",
+	   "__---____________---__",
+	   "_--D----------_--S---_",
+	   "_-----__________-----_",
+	   "___-_____-----___-____",
+	   "___-____---O---__-____",
+	   "___-_____-----___-____",
+	   "_-----__________----__",
+	   "_--I--_____------D--__",
+	   "__---____________--___",
+	   "______________________"],
+
+   on_start :{en : "Sometimes, there is more than one solution...",
+	      fr : "Parfois, il y a plusieurs solutions..."},
+   moves : [Move.SINGLE, Move.SINGLE]});
 
 p({title : { fr : "Qu'entrent les chevaliers !",
 	     en : "Let the knights come !"},
@@ -218,6 +220,41 @@ p({title : { fr : "Et un, et deux, et trois d'un coup...",
 
    moves : [  Move.DOUBLE, Move.TRIPLE]});
 
+
+p({title : { fr : 'Spéciale dédicace aux profs de maths...',
+	     en : 'Here is to the math teachers of the world...'
+	   },
+   rows : ["______________________",
+	   "______________________",
+	   "______________________",
+	   "______________________",
+	   "_I-----------------T__",
+	   "______________________",
+	   "______________________",
+	   "__O------------------_",
+	   "______________________",
+	   "______________________",
+	   "______________________"],
+
+   moves : [Move.DOUBLE, Move.DOUBLE]});
+
+p({title : { fr : "Ca tourne...",
+	     en : "Spining around the solution..."
+	   },
+   rows : ["__________I____-----__",
+	   "__________-________-__",
+	   "__________-________-__",
+	   "__________-________-__",
+	   "__________-________-__",
+	   "__T----------------S__",
+	   "__-_______-___________",
+	   "__-___________________",
+	   "__-___________________",
+	   "__-___________________",
+	   "__--------O___________"],
+
+   moves : [Move.DOUBLE, Move.TRIPLE, Move.KNIGHT, Move.DOUBLE]});
+
 p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	     en : 'Sometimes, you just want to go straight ahead...'},
    rows : ["___---------__________",
@@ -231,6 +268,9 @@ p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
 	   "___-__________________",
 	   "___---------__________",
 	   "______________________"],
+
+   on_end : { en : "That's all for now, thanks for playing ! Come back later for more, who knows..",
+	      fr : "C'est tout pour le moment. A bientôt pour la suite, qui sait..."},
 
    moves : [  Move.DOUBLE, Move.KNIGHT, Move.SINGLE, Move.KNIGHT, Move.SINGLE ]});
 
@@ -253,38 +293,19 @@ p({title : { fr : 'Template',
    moves : [Move.SINGLE, Move.TRIPLE, Move.KNIGHT, Move.SINGLE]});
    */
 
-p({title : { fr : "Joyeux anniversaire...",
-	     en : "Happy birthday to ju..."},
-   rows : ["___----_________----__",
-	   "______-________-____-_",
-	   "____K--____O___-____-_",
-	   "______-________-____-_",
-	   "___----____-____----__",
-	   "___________-__________",
-	   "____-------_-------___",
-	   "____-_____________-___",
-	   "____-_-----I-----_-___",
-	   "____-_____________-___",
-	   "____---------------___"],
-   moves : [ Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.DOUBLE]});
-
-
-
-/* This one sounded like a good idea, but in the end it does not work ... 
-p({title : { fr : 'Parfois on voudrait juste aller tout droit...',
-	     en : 'Sometimes, you just want to go straight ahead...'},
-   rows : ["___---------__________",
-	   "___-_______-__________",
-	   "___-__________________",
-	   "___D__-----_-_________",
-	   "___-__-_____-_________",
-	   "___-__I_____------_-O_",
-	   "___S__-_____-_________",
-	   "___-__-----_-_________",
-	   "___-__________________",
-	   "___---------__________",
-	   "______________________"],
-
-   moves : [  Move.DOUBLE, Move.KNIGHT, Move.SINGLE, Move.KNIGHT, Move.SINGLE ]});
-   */
-
+var EASTER_EGGS = { 42 : {title : { fr : "Joyeux anniversaire...",
+				    en : "Happy birthday to ju..."},
+			  rows : ["___----_________----__",
+				  "______-________-____-_",
+				  "____K--____O___-____-_",
+				  "______-________-____-_",
+				  "___----____-____----__",
+				  "___________-__________",
+				  "____-------_-------___",
+				  "____-_____________-___",
+				  "____-_-----I-----_-___",
+				  "____-_____________-___",
+				  "____---------------___"],
+			  moves : [ Move.DOUBLE, Move.DOUBLE, Move.SINGLE, Move.DOUBLE]
+			 }
+		  };
