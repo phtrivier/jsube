@@ -49,6 +49,7 @@ a:hover {text-decoration: underline; }
 
 #footer {
     font-size : small;
+    text-align : center;
 }
 
 /* Undo / Redo buttons */

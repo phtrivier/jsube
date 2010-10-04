@@ -24,6 +24,7 @@ a:active {text-decoration: none ; }
 a:hover {text-decoration: underline; }
 
 #footer {
+    font-size : small;
     text-align : center;
 }
 
@@ -131,7 +132,8 @@ a:hover {text-decoration: underline; }
     color : white;
 }
 
+
 .unselected-chapter {
-    color : gray;
+    /* color : gray; */
 }
 

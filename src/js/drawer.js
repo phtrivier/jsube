@@ -50,9 +50,11 @@ Drawer.prototype.load_images = function (callback) {
                     [this.path_images, "path_0", "path_0.png"],
                     [this.path_images, "path_1", "path_1.png"],
                     [this.path_images, "path_2", "path_2.png"],
+                    [this.path_images, "path_3", "path_3.png"],
                     [this.overlays, Move.SINGLE, "overlay_move_0.png"],
                     [this.overlays, Move.DOUBLE, "overlay_move_1.png"],
                     [this.overlays, Move.KNIGHT, "overlay_move_2.png"],
+                    [this.overlays, Move.TRIPLE, "overlay_move_3.png"],
                     [this.images, "player", "player.png"],
                     [this.images, "forbiden", "banned_cell.png"]
                   ];
