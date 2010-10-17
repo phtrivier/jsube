@@ -7,10 +7,14 @@ var g_drawer;
 
 var i18n = { en : { "puzzle.previous" : "Previous puzzle",
 		    "puzzle.next" : "Next puzzle",
-		    "puzzle.home" : "Back" },
+		    "puzzle.home" : "Back",
+		    "contact" : "Questions ? Remarks ? Drop a note !"
+		  },
 	     fr : { "puzzle.previous" : "Puzzle pr&eacute;c&eacute;dent",
 		    "puzzle.next" : "Puzzle suivant",
-		    "puzzle.home" : "Retour" } }
+		    "puzzle.home" : "Retour",
+		    "contact" : "Des questions ? Des remarques ? Laissez un message !"
+		  } }
 
 function build_ui(puzzle) {
     $('#moves').empty();
@@ -62,6 +66,9 @@ function set_title(puzzle, puzzle_id) {
     $("#puzzle-title").empty();
     $("#puzzle-title").append(puzzle.get_title(g_lang));
     document.title = "Ube - " + puzzle.get_title(g_lang);
+
+    $("#contact").append(i18n[g_lang]["contact"]);
+
 }
 
 function set_links(puzzle_id) {

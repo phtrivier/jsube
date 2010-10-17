@@ -7,7 +7,9 @@ g_home_i18n = {
 	     "play.game" : "Play game (work in progress !)",
 	     "level.preview" : "Level preview",
 	     "level.preview.stub" : "Click on a level name to display a preview",
-	     "play" : "Play"},
+	     "play" : "Play", 
+	     "contact": "Questions ? Remarks ? Drop a note ?"
+	   },
     "fr" : { "level.choose" : "Choisissez un niveau",
 	     "level.preview" : "Aperçu du niveau",
 	     "welcome": "Bienvenue dans UBE",
@@ -16,27 +18,32 @@ g_home_i18n = {
 	     "play.game" : "Jeu (ça avance !)",
 	     "level.preview" : "Aperçu du niveau",
 	     "level.preview.stub" : "Cliquez sur le titre d'un niveau pour afficher un aperçu",
-	     "play" : "Jouer"  } 
+	     "play" : "Jouer",
+	     "contact" : "Des questions ? Des remarques ? Laissez un message !"
+	   } 
 };
+
+Chapter = function (start, finish) {
+    this.start = start;
+    this.finish = finish;
+}
 
 Home = function (lg) {
     this.drawer = new Drawer(16);
     this.puzzle = null;
     this.has_puzzle = false;
     this.selected_chapter = null;
+    this.chapters = [ new Chapter(0,7), new Chapter(7,14) ];
     this.lg = lg;
 }
     
 Home.prototype.set_selected_chapter = function (chapter_id) {
     if (this.selected_chapter != chapter_id) {
-	if (chapter_id == 0) {
-	    this.load_tutorial_level_list();
-	} else {
-	    this.load_game_level_list();
-	}
+	this.load_chapter(chapter_id);
 	this.add_selected_class(chapter_id);
     }
     this.selected_chapter = chapter_id;
+    this.set_selected_level(this.chapters[chapter_id].start);
 }
 
 Home.prototype.toggle = function(selector, c1, c2)  {
@@ -67,6 +74,7 @@ Home.prototype.load_translated_text = function() {
     this.append_i18n("#levels-header", "level.choose");
     this.append_i18n("#level-preview-header", "level.preview");
     this.append_i18n("#preview-stub", "level.preview.stub");
+    this.append_i18n("#contact", "contact");
 
     $('#levels-header').mousedown(function (event) {
 	if (event.preventDefault) {
@@ -75,7 +83,13 @@ Home.prototype.load_translated_text = function() {
     });
 }
 
-Home.prototype.on_level_selected = function(li, level_index) {
+Home.prototype.on_level_selected = function(level_index) {
+    this.set_selected_level(level_index);
+}
+
+Home.prototype.set_selected_level = function (level_index) {
+    var item_index = level_index - this.chapters[this.selected_chapter].start;
+    var li = $("#levels > li:eq(" + item_index + ")");
     $("#levels > li").each(function (k) {
 	$(this).removeClass('selected-level');
     });
@@ -97,15 +111,13 @@ Home.prototype.on_level_selected = function(li, level_index) {
     $("#play_link").attr("href", this.puzzle_href(level_index));
 }
 
-Home.prototype.load_tutorial_level_list = function() {
-    this.load_level_list(0,7, this.lg);
-}
-
-Home.prototype.load_game_level_list = function() {
-    this.load_level_list(7,14, this.lg);
+Home.prototype.load_chapter = function (index) {
+    var chapter = this.chapters[index];
+    this.load_level_list(chapter.start, chapter.finish);
 }
 
 Home.prototype.load_level_list = function(start, finish) {
+    this.chapter_start = start;
     $("#levels").empty();
     var that = this;
     for (var i = start ; i < finish ; i++) {
@@ -123,7 +135,7 @@ Home.prototype.load_level_list = function(start, finish) {
 		       });
 	
 	levelDiv.bind('click', { index : i}, function (event) {
-	    that.on_level_selected($(this), event.data.index);
+	    that.on_level_selected(event.data.index);
 	});
 	
 	levelDiv.mousedown(function (event) {
