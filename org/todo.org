@@ -1,0 +1,26 @@
+* DONE Show the list of available moves
+** DONE Show images
+** DONE highlight the current move
+
+* DONE Change the current move based on the click
+* DONE Use the current move when displaying the path
+* DONE Move the player from a position to another
+* DONE Use the current move when computing the moves
+* DONE Implement UNDO
+* DONE consume moves when moving
+* DONE Use a 'command' system to undo
+* DONE Implement proper loading of the puzzles
+* DONE Fix bug after consumption of the last 
+* DONE Implement picking up moves along the way
+* DONE Implement startup / end messages
+* DONE Implement finishing a puzzle
+* DONE Use blueprintcss to reorganize the in-game view
+* DONE Use blueprintcss to redo the level selection screen
+** DONE Hardcode it
+** DONE Generate the page
+* TODO Various cleanups
+  + [X] Make sure every string is translated
+  + [ ] Add a check so that if the canvas is not supported, 
+	an error occurs
+  + [X] Remove the older 'jsube.html'
+	

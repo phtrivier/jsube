@@ -1,0 +1,139 @@
+/* TODO factor this */
+home, body {
+    font-family : Helvetica;
+    background-color : black;
+    color : white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color : white;
+}
+
+#header {
+    text-align : center;
+    font-size : medium;
+}
+
+a {
+    color : white;
+}
+
+a:link {text-decoration: none;}
+a:visited {text-decoration: none ; }
+a:active {text-decoration: none ; }
+a:hover {text-decoration: underline; }
+
+#footer {
+    font-size : small;
+    text-align : center;
+}
+
+/* ---------- */
+
+#chapter-navigation {
+    text-align : center;
+    font-size : large;
+}
+
+#level-navigation {
+    font-size : medium;
+}
+
+.hovered-level {
+    background-color : #00A3A3;
+}
+
+.selected-level {
+    background-color : #000070;
+}
+
+#level-preview {
+    text-align : center;
+    background-color : #000070;
+    padding-top : 5px;
+    border-radius : 10px;
+    -moz-border-radius : 10px;
+}
+
+#playground {
+    border : 1px solid white;
+    background-color : black;
+}
+
+.button {
+    border : 1px solid white;
+    background-color : black;
+    padding-top : 2px;
+    padding-bottom : 2px;
+}
+
+.level-header {
+    font-size : large;
+}
+
+#levels {
+    font-size : medium;
+}
+
+#level-navigation {
+    padding-right : 5px;
+    padding-left : 5px;
+    background-color : #303030
+}
+
+
+.tab-header-selected {
+    padding-top : 5px;
+    padding-bottom : 5px;
+    background-color : #303030;
+
+    border-top-left-radius : 10px;
+    border-top-right-radius : 10px;
+
+    -moz-border-radius-topLeft : 10px;
+    -moz-border-radius-topRight : 10px;
+}
+
+.tab-header-unselected {
+    padding-top : 5px;
+    padding-bottom : 5px;
+    background-color : black;
+}
+
+.level {
+    padding-top : 3px;
+    padding-left : 3px;
+}
+
+#levels {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#levels li
+{
+    cursor : default;
+    list-style: none;
+    margin: 0;
+    padding: 0.25em;
+    border-top: 1px solid gray;
+    width : 275px;
+}
+
+#levels-header {
+    cursor : default;
+}
+
+.selected-chapter, .unselected-chapter {
+    cursor : default;
+}
+
+.selected-chapter {
+    color : white;
+}
+
+
+.unselected-chapter {
+    /* color : gray; */
+}
+

@@ -1,0 +1,5 @@
+/**
+ * Representation of a puzzle
+ */
+Puzzle = function () {
+},

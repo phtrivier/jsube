@@ -1,0 +1,13 @@
+<html>
+ <head>
+  <title>Foo Test Page</title>
+  <script language="javascript" src="app/jsUnitCore.js"></script>
+ </head>
+ <body>
+  <script language="javascript">
+    function testWithValidArgs() {
+        assertTrue(false);
+    }
+  </script>
+ </body>
+</html>

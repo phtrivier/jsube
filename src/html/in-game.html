@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <title>UBE</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <link rel="shortcut icon" type="image/x-icon" href="../../data/images/ico/player.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../data/images/png/player.png" />
+    <link rel="stylesheet" href="../css/blueprint/screen.css" type="text/css" media="screen, projection"></link>
+    <link rel="stylesheet" href="../css/blueprint/print.css" type="text/css" media="print"></link>
+    <!--[if lt IE 8]><link rel="stylesheet" href="css/blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+    <link type="text/css" rel="stylesheet" href="../css/dark-hive/jquery-ui-1.8.2.custom.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/in-game.css"/>
+    <!-- Google analytics code -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5548800-2']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  </head>
+  <body>
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery.url.min.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/lib/jquery-ui-1.8.2.custom.min.js"></script>
+    <!-- TODO : compress all files into a big one, zip it, and hope for the
+	 best ... maybe using -->
+    <script type="text/javascript" charset="UTF-8" src="../js/node.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/agenda.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/archive.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/cell.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/puzzle.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/move.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/path_finder.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/move_button.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/command_stack.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/puzzles.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/levels.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/drawer.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/canvas_checker.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="../js/jsube.js"></script>
+
+    <div id="outer" class="container prepend-2">
+      <div id="navigation" class="span-20">
+	<div class="span-6" id="previous" ><a class="link transition" id="link_previous"></a></div>
+	<div class="span-8 back-link" id="home"><a class="link transition"  id="link_home" href="home.html"></a></div>
+	<div class="span-6 last next-link" id="next"><a class="link transition"  id="link_next"></a></div>
+      </div>
+
+      <div id="puzzle-name" class="span-20 prepend-top">
+	<h3 id="puzzle-title">...Veuillez patienter...</h3>
+      </div>
+
+      <div id="game" class="span-20 prepend-1">
+
+	<canvas id="playground" width="704px" height="352px"></canvas>
+	
+	<div id="undo-redo" class="span-4 prepend-top last">
+	  <div id="undo" class="span-2 undo_disabled"></div>
+	  <div id="redo" class="span-2 last redo_disabled"></div>
+	</div>
+	<div id="moves" class="span-16 prepend-top"></div>
+      </div>
+
+      <div id="footer" class="span-20 last prepend-top">
+	<a href="mailto:phtrivier@yahoo.fr" id="contact"></a>
+	<br/>
+	Copyright (C) 2010 - <a href="mailto:phtrivier@yahoo.fr">Pierre-Henri Trivier</a>
+      </div>
+
+    </div>
+
+    <div id="dialog-message"></div>
+
+  </body>
+</html>

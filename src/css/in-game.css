@@ -1,0 +1,88 @@
+/* Css for in-game screen */
+
+html, body {
+    font-family : Helvetica;
+    background-color : black;
+    color : white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color : white;
+}
+
+
+.back-link {
+    text-align : center;
+}
+
+.next-link {
+    text-align : right;
+}
+
+a {
+    color : white;
+}
+
+a:link {text-decoration: none;}
+a:visited {text-decoration: none ; }
+a:active {text-decoration: none ; }
+a:hover {text-decoration: underline; }
+
+#header {
+    border : 1px solid red;
+}
+
+#navigation {
+    font-size : medium;
+}
+
+#puzzle-name {
+    text-align : center;
+    font-size : large;
+}
+
+#playground {
+    border-style : solid;
+    border-color : white;
+    border-size : 1px;
+}
+
+#footer {
+    font-size : small;
+    text-align : center;
+}
+
+/* Undo / Redo buttons */
+.undo_disabled, .undo_enabled, .redo_disabled, .redo_enabled {
+    width : 64px;
+    height : 64px;
+}
+
+.undo_disabled {
+    background-image : url('../../data/images/png/disabled_undo.png');
+}
+
+.redo_disabled {
+    background-image : url('../../data/images/png/disabled_redo.png');
+}
+
+.undo_enabled {
+    background-image : url('../../data/images/png/undo.png');
+}
+
+.redo_enabled {
+    background-image : url('../../data/images/png/redo.png');
+}
+
+.move_unselected {
+    border : 2px solid black;
+}
+
+.move_hovered {
+    border : 2px solid #327980;
+}
+
+.move_current {
+    border : 3px solid blue;
+}
+

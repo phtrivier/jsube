@@ -1,0 +1,55 @@
+/* TODO factor this */
+home, body {
+    font-family : Helvetica;
+    background-color : black;
+    color : white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color : white;
+}
+
+#header {
+    text-align : center;
+    font-size : large;
+}
+
+a {
+    color : white;
+}
+
+a:link {text-decoration: none;}
+a:visited {text-decoration: none ; }
+a:active {text-decoration: none ; }
+a:hover {text-decoration: underline; }
+
+#footer {
+    text-align : center;
+}
+
+#footer a {
+    font-size : small;
+}
+
+/* --------- */ 
+
+#intro {
+    font-size : large;
+}
+
+#other_browsers {
+    text-align : center;
+}
+
+#suggestion {
+    font-size : medium;
+}
+
+a {
+    font-size : large;
+}
+
+#details {
+    font-size : small;
+    font-style : italic;
+}

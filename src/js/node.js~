@@ -1,0 +1,5 @@
+function Node(i,j,parent) {
+    this.i  = i
+    this.j = j
+    this.parent = parent
+}

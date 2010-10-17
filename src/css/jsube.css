@@ -1,17 +1,56 @@
-body {
+/* ----------- */
+
+html, body {
+    height : 98%;
+    font-family : Helvetica;
+}
+
+#wrapper {
+    min-height : 100%;
+}
+
+#main {
+    overflow:auto;
+    padding-bottom: 30px;
+}  /* must be same height as the footer */
+
+#footer {
+    position: relative;
+    margin-top: -30px; /* negative value of footer height */
+    height: 30px;
+    clear:both;
+    font-size : 10pt;
+} 
+
+/* ----------- */
+
+html {
+    margin-left : 20%;
+    margin-right : 20%;
     background-color : black;
+}
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;/
+}
+
+body {
     color : white;
+}
+
+#playground, #ui {
+    width : 704px;
 }
 
 #playground {
     border-style : solid;
     border-color : white;
     border-size : 1px;
-    width : 704px;
-    height : 352px;
-    position : absolute;
-    top : 20;
-    bottom : 20;
 }
 
 .cell {
@@ -19,3 +58,92 @@ body {
     height : 32px;
     background-image : url("../../data/images/png/cell_1.png")
 }
+
+.player {
+    width : 32px;
+    height : 32px;
+    background-image : url("../../data/images/png/player.png")
+}
+
+.move_unselected, .move_current {
+    border-style :solid;
+    border-size : 1px;
+}
+
+.move_unselected {
+    border-color : black;
+}
+
+.move_current {
+    border-color : blue;
+}
+
+.undo_disabled, .undo_enabled, .redo_disabled, .redo_enabled {
+    width : 64px;
+    height : 64px;
+}
+
+.undo_disabled {
+    background-image : url('../../data/images/png/disabled_undo.png');
+}
+
+.redo_disabled {
+    background-image : url('../../data/images/png/disabled_redo.png');
+}
+
+.undo_enabled {
+    background-image : url('../../data/images/png/undo.png');
+}
+
+.redo_enabled {
+    background-image : url('../../data/images/png/redo.png');
+}
+
+#ui {
+/*    border : 1px solid red; */
+    padding-top : 10px;
+}
+
+#undo-redo {
+/*     border : 1px solid blue; */
+    float : left;
+}
+
+#undo, #redo {
+    float : left;
+}
+
+#moves {
+/*    border : 1px solid white; */
+    width : 550px;
+    float : left;
+    margin-left : 20px;
+}
+
+a:link {text-decoration: none ; color : white;}
+a:visited {text-decoration: none ; color : white;}
+a:active {text-decoration: none ; color : white;}
+a:focus {text-decoration: underline; color: white;}
+a:hover {text-decoration: underline; color: white;}
+
+a:focus, a:hover {
+    color : white;
+}
+
+#navigation {
+    text-align : center;
+    width : 100%;
+    border : 1px solid green;
+}
+
+#previous, #home, #next {
+    float : left;
+    width : 30%;
+    padding-bottom : 20px;
+}
+
+h3 {
+    text-align : center;
+}
+
+
