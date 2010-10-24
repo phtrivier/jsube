@@ -1,0 +1,17 @@
+This is the javascript version of UBE, a puzzle game.
+
+Your goal is to traverse a maze, using only a limited number of moves.
+
+Each move has a different properties. The green move lets you move
+between adjacent cells of the puzzle ; the yellow one lets you move
+two cells at a time, the purple move lets you move three cells a
+time. The brown move lets you move kinda like a knight in chess.
+
+The game should be available at : 
+
+http://ph.on.things.free.fr/projects/jsube/index.hmtml
+
+Development is not in progress any more, but feel free to drop a note
+if you have ideas for levels and want to take on ! 
+
+Have fun.
